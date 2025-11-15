@@ -155,6 +155,9 @@ def save_data_to_jsonl(data, filepath, columns_to_keep=None, date_columns=None):
     """
     # 确保目录存在
     ensure_dir_exists(os.path.dirname(filepath))
+
+    # 创建数据副本以避免SettingWithCopyWarning
+    data = data.copy()
     
     # 如果指定了要保留的列，则过滤
     if columns_to_keep:
