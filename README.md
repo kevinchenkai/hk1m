@@ -1,18 +1,71 @@
 # hk1m
-1 Year, 1M HK, Stock Agent.
 
-# 2026年，100W HK，AI Agent 自动投资。
+> 1 Year, 1M HK, Stock Agent.  
+> **目标：2026年，100万港币，AI Agent 自动投资**
 
-./datasets  #必要的数据
-./prompts #交易指令
-./src  #源代码
+## 📁 项目结构
 
-# Futu API
-查询账号资金：https://openapi.futunn.com/futu-api-doc/trade/get-funds.html 
-查询持仓：https://openapi.futunn.com/futu-api-doc/trade/get-position-list.html 
-获取实时 K 线：https://openapi.futunn.com/futu-api-doc/quote/get-kl.html 
-获取实时报价：https://openapi.futunn.com/futu-api-doc/quote/get-stock-quote.html 
-查询历史订单：https://openapi.futunn.com/futu-api-doc/trade/get-history-order-list.html 
-查询历史成交：https://openapi.futunn.com/futu-api-doc/trade/get-history-order-fill-list.html 
-自动下单：https://openapi.futunn.com/futu-api-doc/trade/place-order.html 
+```
+hk1m/
+├── datasets/          # 必要的数据
+│   ├── ground/
+│   ├── klines/
+│   ├── orders/
+│   └── prompts/
+├── logs/              # 日志文件
+├── src/               # 源代码
+└── README.md
+```
+
+## 🔧 功能模块
+
+| 目录 | 描述 |
+|------|------|
+| `./datasets` | 必要的数据存储 |
+| `./prompts` | 交易指令模板 |
+| `./src` | 核心源代码 |
+
+## 📊 Futu API 接口
+
+### 账户管理
+- [查询账号资金](https://openapi.futunn.com/futu-api-doc/trade/get-funds.html)
+- [查询持仓](https://openapi.futunn.com/futu-api-doc/trade/get-position-list.html)
+
+### 行情数据
+- [获取实时K线](https://openapi.futunn.com/futu-api-doc/quote/get-kl.html)
+- [获取实时报价](https://openapi.futunn.com/futu-api-doc/quote/get-stock-quote.html)
+
+### 交易记录
+- [查询历史订单](https://openapi.futunn.com/futu-api-doc/trade/get-history-order-list.html)
+- [查询历史成交](https://openapi.futunn.com/futu-api-doc/trade/get-history-order-fill-list.html)
+
+### 交易操作
+- [自动下单](https://openapi.futunn.com/futu-api-doc/trade/place-order.html)
+
+## 🚀 快速开始
+
+```bash
+# 克隆项目
+git clone https://github.com/kevinchenkai/hk1m.git
+cd hk1m
+
+# 安装依赖
+pip install -r requirements.txt
+
+# 运行示例
+python src/get_klines.py
+```
+
+## 📈 投资策略
+
+AI Agent 将通过以下步骤实现自动投资：
+
+1. **数据收集**：获取实时K线和报价数据
+2. **策略分析**：基于历史数据和AI模型进行价格预测
+3. **风险控制**：设置止损止盈策略
+4. **自动交易**：根据策略自动执行买卖操作
+
+---
+
+*最后更新：2025年11月15日*
 
