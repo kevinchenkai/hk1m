@@ -1,6 +1,7 @@
+import os
 from openai import OpenAI
 
-KSC_API_KEY = "7334fd3e-8d22-45e2-b953-6daca13cd6bd" 
+KSC_API_KEY = os.getenv("KSC_API_KEY")
 
 # MODEL = "kimi-k2-thinking"
 MODEL = "deepseek-v3.2-exp"
