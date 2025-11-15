@@ -52,7 +52,7 @@ def get_stock_kline(stock_code, days=10, kl_type=KLType.K_DAY, au_type=AuType.QF
     finally:
         quote_ctx.close()
 
-def save_kline_data(stock_code, data, data_dir='./data'):
+def save_kline_data(stock_code, data, data_dir='./datasets/klines'):
     """
     保存K线数据到文件
     

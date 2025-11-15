@@ -39,11 +39,11 @@ def build_stock_prompt(stock_code, data_dir='./data', stg=1):
     gt_content = read_file(filepath)
 
     # 加载 prompt 模板
-    prompt_path = os.path.join('prompt', f'prompt_stg{stg}.template')
+    prompt_path = os.path.join('prompts', f'prompt_stg{stg}.template')
     prompt_content = read_file(prompt_path)
     prompt = prompt_content.replace('{STOCK_CODE}', stock_code).replace('{KLINE_DATA}', kline_content).replace('{ORDER_DATA}', order_content).replace('{GT_DATA}', gt_content)
 
-    stock_prompt = os.path.join('prompt', f'{stock_code}_prompt.txt')
+    stock_prompt = os.path.join('prompts', f'{stock_code}_prompt.txt')
     write_file(stock_prompt, prompt)
 
     #print(prompt)
