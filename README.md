@@ -1,6 +1,6 @@
 # hk1m
 
-> 1 Year, 1M HK, Stock Agent.  
+> Stock Agent: 1 Year, 1M HK, +20%.  
 > **目标：2026年，200万港币，AI Agent 投资策略，目标年收益20%**
 
 ## 📁 项目结构
