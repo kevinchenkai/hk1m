@@ -14,6 +14,9 @@ hk1m/
 │   └── prompts/
 ├── logs/              # 日志文件
 ├── src/               # 源代码
+│   ├── get_klines.py  # 获取K线数据
+│   ├── get_order.py # 获取下单数据
+│   └── build_prompt.py # 生成大模型执行 prompt 
 └── README.md
 ```
 
@@ -53,7 +56,9 @@ cd hk1m
 pip install -r requirements.txt
 
 # 运行示例
-python src/get_klines.py
+python src/get_klines.py  #获取近期K线数据
+python src/get_order.py  #获取下单历史数据
+python src/build_prompt.py  #生成给大模型执行 Prompt
 ```
 
 ## 📈 投资策略
