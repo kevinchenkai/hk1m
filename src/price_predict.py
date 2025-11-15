@@ -1,6 +1,8 @@
+from dotenv import load_dotenv
 import os
 from openai import OpenAI
 
+load_dotenv()  # Load environment variables from .env file
 KSC_API_KEY = os.getenv("KSC_API_KEY")
 
 # MODEL = "kimi-k2-thinking"
