@@ -20,6 +20,7 @@ DEFAULT_DATA_DIR = './datasets'
 DEFAULT_KLINES_DIR = './datasets/klines'
 DEFAULT_ORDERS_DIR = './datasets/orders'
 DEFAULT_GROUND_DIR = './datasets/ground'
+DEFAULT_STRATEGY_DIR = './strategy'
 DEFAULT_PROMPTS_DIR = './prompts'
 DEFAULT_LOGS_DIR = './logs'
 
@@ -139,6 +140,21 @@ def get_ground_truth_filepath(stock_code, data_dir=DEFAULT_GROUND_DIR):
         str: 真实交易数据文件路径
     """
     filename = f"{stock_code}_gt.jsonl"
+    filepath = os.path.join(data_dir, filename)
+    return filepath
+
+def get_strategy_filepath(strategy_name, data_dir=DEFAULT_STRATEGY_DIR):
+    """
+    生成策略文件路径
+    
+    Args:
+        strategy_name (str): 策略名称
+        data_dir (str): 策略目录
+    
+    Returns:
+        str: 策略文件路径
+    """
+    filename = f"{strategy_name}.template"
     filepath = os.path.join(data_dir, filename)
     return filepath
 

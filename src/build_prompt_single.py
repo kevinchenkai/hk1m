@@ -1,7 +1,7 @@
 import os
 from common import *
 
-def build_stock_prompt():
+def build_stock_prompt(stock_code, stg='stg03'):
     """
     构建股票提示语
     
@@ -11,33 +11,19 @@ def build_stock_prompt():
     """
     try:
         # 读取K线数据
-        stock_code = 'HK.00700'
         kline_filepath = get_kline_filepath(stock_code)
         kline_content = read_file(kline_filepath)
 
-        stock_code = 'HK.09988'
-        kline_filepath = get_kline_filepath(stock_code)
-        kline_content = kline_content + '\n' +read_file(kline_filepath)
-
-
-        # 读取订单数据
-        stock_code = 'HK.00700'
+        # 读取订单数据  
         order_filepath = get_order_filepath(stock_code)
         order_content = read_file(order_filepath)
-        stock_code = 'HK.09988'
-        order_filepath = get_order_filepath(stock_code)
-        order_content = order_content + '\n' + read_file(order_filepath)
 
         # 读取真实交易数据
-        stock_code = 'HK.00700'
         gt_filepath = get_ground_truth_filepath(stock_code)
         gt_content = read_file(gt_filepath)
-        stock_code = 'HK.09988'
-        gt_filepath = get_ground_truth_filepath(stock_code)
-        gt_content = gt_content + '\n' + read_file(gt_filepath)
 
         # 加载 prompt 模板
-        stg_path = get_strategy_filepath(f'stg03')
+        stg_path = get_strategy_filepath(f'{stg}')
         prompt_stg = read_file(stg_path)
         
         # 替换模板变量
@@ -48,7 +34,7 @@ def build_stock_prompt():
                  .replace('{GT_DATA}', gt_content))
 
         # 保存提示语
-        stock_prompt_path = os.path.join('prompts', f'combined_prompt.txt')
+        stock_prompt_path = os.path.join('prompts', f'{stock_code}_prompt.txt')
         write_file(stock_prompt_path, prompt)
         
         print_success(stock_code, stock_prompt_path, "提示语")
@@ -57,8 +43,11 @@ def build_stock_prompt():
         print(f"✗ {stock_code} 构建提示语失败: {str(e)}")
 
 def main():
-    # 构建股票提示语
-    build_stock_prompt() 
+    stock_code = 'HK.00700'
+    build_stock_prompt(stock_code, stg='stg02') 
+
+    stock_code = 'HK.09988'
+    build_stock_prompt(stock_code, stg='stg02')    
 
 if __name__ == "__main__":
     main()
