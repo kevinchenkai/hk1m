@@ -25,7 +25,6 @@ HK.09988 持仓 2000 股票，账号 100W 港币现金
 | last_close | float | 昨收价 |
 
 ## 最近真实 日K线 数据
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-08-14 00:00:00","open":124.8,"close":121.8,"high":125.2,"low":121.0,"volume":83916791,"turnover":10311184942.0,"pe_ratio":16.562,"turnover_rate":0.0044,"last_close":123.7}
 {"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-08-15 00:00:00","open":119.3,"close":118.1,"high":119.8,"low":117.8,"volume":110541625,"turnover":13097069023.0,"pe_ratio":16.059,"turnover_rate":0.00579,"last_close":121.8}
 {"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-08-18 00:00:00","open":118.3,"close":118.6,"high":120.8,"low":118.3,"volume":76093381,"turnover":9087497702.0,"pe_ratio":16.127,"turnover_rate":0.00399,"last_close":118.1}
 {"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-08-19 00:00:00","open":118.4,"close":118.3,"high":119.7,"low":117.9,"volume":55732895,"turnover":6612360159.0,"pe_ratio":16.086,"turnover_rate":0.00292,"last_close":118.6}
@@ -89,12 +88,14 @@ HK.09988 持仓 2000 股票，账号 100W 港币现金
 {"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-11-12 00:00:00","open":157.1,"close":156.8,"high":158.4,"low":155.2,"volume":96741580,"turnover":15147545432.0,"pe_ratio":21.333,"turnover_rate":0.00507,"last_close":160.4}
 {"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-11-13 00:00:00","open":153.9,"close":162.0,"high":166.0,"low":153.3,"volume":155447392,"turnover":24785001720.0,"pe_ratio":22.04,"turnover_rate":0.00814,"last_close":156.8}
 {"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-11-14 00:00:00","open":156.5,"close":154.9,"high":158.4,"low":154.5,"volume":101354219,"turnover":15847725884.0,"pe_ratio":21.074,"turnover_rate":0.00531,"last_close":162.0}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-11-17 00:00:00","open":152.3,"close":154.9,"high":158.0,"low":152.1,"volume":113907864,"turnover":17641626942.0,"pe_ratio":21.074,"turnover_rate":0.00597,"last_close":154.9}
 
 ## 模型预测和真实数据对比
 | 日期 | 预测高点 | 预测低点 | 真实高点 ｜ 真实低点 |
-| 20251112| 165 | 158 | 158.4 | 155.2 |
-| 20251113| 157.5 | 153.5 | 166 | 153.3 |
-| 20251114| 167 | 160 | 158.4 | 154.5 |
+| 20251112 | HK.09988 | 165 | 158 | 158.4 | 155.2 |
+| 20251113 | HK.09988 | 157.5 | 153.5 | 166 | 153.3 |
+| 20251114 | HK.09988 | 167 | 160 | 158.4 | 154.5 |
+| 20251117 | HK.09988 | 158 | 154 | 158 | 152.1 |
 
 ## 订单字段说明
 | 字段名 | 说明 |
@@ -124,5 +125,3 @@ HK.09988 持仓 2000 股票，账号 100W 港币现金
 {"create_time":"2025-09-25","code":"HK.09988","trd_side":"SELL","price":178.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
 {"create_time":"2025-09-24","code":"HK.09988","trd_side":"SELL","price":170.0,"qty":100.0,"order_status":"FILLED_ALL"}
 {"create_time":"2025-09-24","code":"HK.09988","trd_side":"SELL","price":162.0,"qty":100.0,"order_status":"FILLED_ALL"}
-{"create_time":"2025-09-17","code":"HK.09988","trd_side":"SELL","price":159.0,"qty":100.0,"order_status":"FILLED_ALL"}
-{"create_time":"2025-09-16","code":"HK.09988","trd_side":"SELL","price":155.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
