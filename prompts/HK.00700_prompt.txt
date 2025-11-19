@@ -25,7 +25,6 @@ HK.00700 持仓 2000 股票，账号 100W 港币现金
 | last_close | float | 昨收价 |
 
 ## 最近真实 日K线 数据
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-08-15 00:00:00","open":587.0,"close":592.0,"high":596.5,"low":584.5,"volume":22176876,"turnover":13122452831.0,"pe_ratio":25.904,"turnover_rate":0.00242,"last_close":590.0}
 {"code":"HK.00700","name":"腾讯控股","time_key":"2025-08-18 00:00:00","open":594.0,"close":587.0,"high":596.0,"low":587.0,"volume":17590658,"turnover":10403063174.0,"pe_ratio":25.687,"turnover_rate":0.00192,"last_close":592.0}
 {"code":"HK.00700","name":"腾讯控股","time_key":"2025-08-19 00:00:00","open":588.0,"close":592.5,"high":597.0,"low":583.0,"volume":16359474,"turnover":9665673921.0,"pe_ratio":25.928,"turnover_rate":0.00178,"last_close":587.0}
 {"code":"HK.00700","name":"腾讯控股","time_key":"2025-08-20 00:00:00","open":589.0,"close":590.5,"high":594.5,"low":585.5,"volume":15952765,"turnover":9407128004.0,"pe_ratio":25.841,"turnover_rate":0.00174,"last_close":592.5}
@@ -89,6 +88,7 @@ HK.00700 持仓 2000 股票，账号 100W 港币现金
 {"code":"HK.00700","name":"腾讯控股","time_key":"2025-11-13 00:00:00","open":649.5,"close":656.0,"high":660.0,"low":645.0,"volume":17299913,"turnover":11283368344.0,"pe_ratio":28.625,"turnover_rate":0.00189,"last_close":657.0}
 {"code":"HK.00700","name":"腾讯控股","time_key":"2025-11-14 00:00:00","open":645.0,"close":641.0,"high":659.0,"low":640.0,"volume":19956444,"turnover":12900520613.0,"pe_ratio":27.97,"turnover_rate":0.00218,"last_close":656.0}
 {"code":"HK.00700","name":"腾讯控股","time_key":"2025-11-17 00:00:00","open":640.0,"close":636.5,"high":642.5,"low":633.0,"volume":13794477,"turnover":8785917134.0,"pe_ratio":27.774,"turnover_rate":0.00151,"last_close":641.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2025-11-18 00:00:00","open":628.0,"close":623.5,"high":641.0,"low":620.5,"volume":18818609,"turnover":11791388064.0,"pe_ratio":27.206,"turnover_rate":0.00206,"last_close":636.5}
 
 ## 模型预测和真实数据对比
 | 日期 | 预测高点 | 预测低点 | 真实高点 ｜ 真实低点 |
@@ -96,6 +96,7 @@ HK.00700 持仓 2000 股票，账号 100W 港币现金
 | 20251113 | HK.00700 | 660 | 654 | 660 | 645 |
 | 20251114 | HK.00700 | 665 | 643 | 659 | 640 |
 | 20251117 | HK.00700 | 659.5 | 637 | 642.5 | 633 |
+| 20251118 | HK.00700 | 643 | 630 | 641 | 620.5 |
 
 ## 订单字段说明
 | 字段名 | 说明 |
@@ -107,6 +108,8 @@ HK.00700 持仓 2000 股票，账号 100W 港币现金
 | order_status | 订单状态: CANCELLED_ALL - 交易中止, FILLED_ALL - 交易成功 |
 
 ## 真实订单数据
+{"create_time":"2025-11-18","code":"HK.00700","trd_side":"BUY","price":620.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2025-11-18","code":"HK.00700","trd_side":"BUY","price":618.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
 {"create_time":"2025-11-14","code":"HK.00700","trd_side":"SELL","price":675.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
 {"create_time":"2025-11-13","code":"HK.00700","trd_side":"SELL","price":675.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
 {"create_time":"2025-11-13","code":"HK.00700","trd_side":"BUY","price":628.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
