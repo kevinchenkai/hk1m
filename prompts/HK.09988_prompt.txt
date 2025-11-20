@@ -25,8 +25,6 @@ HK.09988 持仓 2000 股票，账号 100W 港币现金
 | last_close | float | 昨收价 |
 
 ## 最近真实 日K线 数据
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-08-18 00:00:00","open":118.3,"close":118.6,"high":120.8,"low":118.3,"volume":76093381,"turnover":9087497702.0,"pe_ratio":16.127,"turnover_rate":0.00399,"last_close":118.1}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-08-19 00:00:00","open":118.4,"close":118.3,"high":119.7,"low":117.9,"volume":55732895,"turnover":6612360159.0,"pe_ratio":16.086,"turnover_rate":0.00292,"last_close":118.6}
 {"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-08-20 00:00:00","open":117.2,"close":117.5,"high":118.0,"low":116.1,"volume":62830049,"turnover":7348177075.0,"pe_ratio":15.975,"turnover_rate":0.00329,"last_close":118.3}
 {"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-08-21 00:00:00","open":117.3,"close":115.7,"high":117.6,"low":115.0,"volume":66716053,"turnover":7746247569.0,"pe_ratio":15.73,"turnover_rate":0.0035,"last_close":117.5}
 {"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-08-22 00:00:00","open":115.5,"close":118.0,"high":118.3,"low":115.3,"volume":73604857,"turnover":8619159505.0,"pe_ratio":16.043,"turnover_rate":0.00386,"last_close":115.7}
@@ -89,14 +87,18 @@ HK.09988 持仓 2000 股票，账号 100W 港币现金
 {"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-11-14 00:00:00","open":156.5,"close":154.9,"high":158.4,"low":154.5,"volume":101354219,"turnover":15847725884.0,"pe_ratio":21.074,"turnover_rate":0.00531,"last_close":162.0}
 {"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-11-17 00:00:00","open":152.3,"close":154.9,"high":158.0,"low":152.1,"volume":113907864,"turnover":17641626942.0,"pe_ratio":21.074,"turnover_rate":0.00597,"last_close":154.9}
 {"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-11-18 00:00:00","open":153.2,"close":154.6,"high":158.4,"low":153.2,"volume":102880519,"turnover":16010863976.0,"pe_ratio":21.034,"turnover_rate":0.00539,"last_close":154.9}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-11-19 00:00:00","open":155.8,"close":156.4,"high":157.9,"low":155.1,"volume":71141046,"turnover":11135128038.0,"pe_ratio":21.278,"turnover_rate":0.00373,"last_close":154.6}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-11-20 00:00:00","open":158.3,"close":154.8,"high":159.8,"low":154.0,"volume":65486765,"turnover":10209807053.0,"pe_ratio":21.061,"turnover_rate":0.00343,"last_close":156.4}
 
 ## 模型预测和真实数据对比
-| 日期 | 预测高点 | 预测低点 | 真实高点 ｜ 真实低点 |
-| 20251112 | HK.09988 | 165 | 158 | 158.4 | 155.2 |
-| 20251113 | HK.09988 | 157.5 | 153.5 | 166 | 153.3 |
-| 20251114 | HK.09988 | 167 | 160 | 158.4 | 154.5 |
-| 20251117 | HK.09988 | 158 | 154 | 158 | 152.1 |
-| 20251118 | HK.09988 | 156.5 | 151 | 158.4 | 153.2 |
+| 日期 | 真实高点 ｜ 真实低点 | DeepSeek预测高点 | DeepSeek预测低点 | Gemini预测高点 | Gemini预测低点 | 
+| 20251112 | HK.09988 | 158.4 | 155.2 | 165 | 158 | - | - |
+| 20251113 | HK.09988 | 166 | 153.3 | 157.5 | 153.5 | - | - |
+| 20251114 | HK.09988 | 158.4 | 154.5 | 167 | 160 | - | - |
+| 20251117 | HK.09988 | 158 | 152.1 | 158 | 154 | - | - |
+| 20251118 | HK.09988 | 158.4 | 153.2 | 156.5 | 151 | 160.5 | 153.2 |
+| 20251119 | HK.09988 | 157.9 | 155.1 | 158 | 152 | 157.8 | 152.8 |
+| 20251120 | HK.09988 | 159.8 | 154 | 158.5 | 154 | 159.6 | 154.4 |
 
 ## 订单字段说明
 | 字段名 | 说明 |
@@ -108,6 +110,7 @@ HK.09988 持仓 2000 股票，账号 100W 港币现金
 | order_status | 订单状态: CANCELLED_ALL - 交易中止, FILLED_ALL - 交易成功 |
 
 ## 真实订单数据
+{"create_time":"2025-11-19","code":"HK.09988","trd_side":"BUY","price":150.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
 {"create_time":"2025-11-18","code":"HK.09988","trd_side":"BUY","price":150.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
 {"create_time":"2025-11-14","code":"HK.09988","trd_side":"BUY","price":152.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
 {"create_time":"2025-11-14","code":"HK.09988","trd_side":"SELL","price":167.0,"qty":100.0,"order_status":"CANCELLED_ALL"}

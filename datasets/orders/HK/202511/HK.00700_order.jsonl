@@ -1,3 +1,4 @@
+{"create_time":"2025-11-19","code":"HK.00700","trd_side":"BUY","price":620.0,"qty":100.0,"order_status":"FILLED_ALL"}
 {"create_time":"2025-11-18","code":"HK.00700","trd_side":"BUY","price":620.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
 {"create_time":"2025-11-18","code":"HK.00700","trd_side":"BUY","price":618.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
 {"create_time":"2025-11-14","code":"HK.00700","trd_side":"SELL","price":675.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
@@ -27,4 +28,3 @@
 {"create_time":"2025-09-24","code":"HK.00700","trd_side":"SELL","price":645.0,"qty":100.0,"order_status":"FILLED_ALL"}
 {"create_time":"2025-09-23","code":"HK.00700","trd_side":"BUY","price":629.0,"qty":100.0,"order_status":"FILLED_ALL"}
 {"create_time":"2025-09-22","code":"HK.00700","trd_side":"BUY","price":637.0,"qty":100.0,"order_status":"FILLED_ALL"}
-{"create_time":"2025-09-19","code":"HK.00700","trd_side":"BUY","price":635.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
