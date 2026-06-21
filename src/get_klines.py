@@ -50,6 +50,10 @@ def save_kline_data(stock_code, data):
     """
     filepath = get_kline_filepath(stock_code)
     save_data_to_jsonl(data, filepath)
+
+    lastest = get_kline_lastest(stock_code)
+    save_data_to_jsonl(data, lastest)
+
     print_success(stock_code, filepath, "K线数据")
 
 def get_all_stocks_kline(stock_codes=None, days=10, delay=1):

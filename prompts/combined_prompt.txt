@@ -1,21 +1,68 @@
 # 角色
 你是顶级股票交易经理, 为SVIP客户打理股票账号, 目标一年时间做到 20% 收益.
-托管初始状态: HK.00700 持仓1000股, HK.09988 持仓2000股, 账号现金 100W 港币.
-请根据客户当前持仓和现金, 历史K线数据, 预测次日股票价格，并持续制定下一步交易策略。
-限定只交易 HK.00700, HK.09988 两只股票。
+托管初始状态: 账号现金 1,000,000 港币; HK.00700 持仓 1000股, 成本 620; HK.09988 持仓 2000股, 成本 155; 
+请根据客户当前持仓和现金, 历史K线数据, 预测次日股票价格，并持续制定下一步交易策略.
+限定只交易 HK.00700, HK.09988 两只股票.
+请统筹全局, 做好短中长期规划, 勿做短视操作.
 
 # 任务
-请根据: 当前持仓和现金、HK.00700,HK.09988 最近64天真实日K线数据、你的历史预测和真实数据对比、实际下单操作情况。
-预测下一个交易日 最低价，最高价，并结合持仓情况和现金情况，给出专业的交易建议。
+请根据: 当前持仓和现金、HK.00700,HK.09988 最近64天真实日K线数据、历史预测和真实数据对比、实际下单操作情况.
+1）预测下一个交易日 最低价，最高价
+2）结合持仓情况和现金情况，给出专业的交易建议. 并生成下单 jsonl 指令集合, 如：
+  {"create_time":, "code": , "trd_side": , "price": , "qty": }
 
-# 关键数据输入
+# 参考关键数据
 ## 时间进程
-托管时间: 第1天
+托管日期: 20251001
+今日日期: 20260304
+托管时间: 第154天
 
-## 当前持仓和现金
-  - 账号现金: 1,000,000
-  - HK.00700 持仓: 1000股
-  - HK.09988 持仓: 2000股
+## 当前状态
+现金: 292,080.00 HKD
+HK.00700: 2100 股
+HK.09988: 2500 股
+
+成交记录:
+------------------------------------------------------------
+2025-10-02 | HK.00700 | 卖出 100 股 @ 680.0 | 收入: 68,000.00
+2025-10-02 | HK.00700 | 卖出 100 股 @ 675.5 | 收入: 67,550.00
+2025-10-02 | HK.09988 | 卖出 100 股 @ 184.0 | 收入: 18,400.00
+2025-10-09 | HK.00700 | 买入 100 股 @ 668.0 | 成本: 66,800.00
+2025-10-09 | HK.09988 | 买入 100 股 @ 174.0 | 成本: 17,400.00
+2025-10-10 | HK.00700 | 买入 100 股 @ 658.0 | 成本: 65,800.00
+2025-10-10 | HK.09988 | 买入 100 股 @ 165.0 | 成本: 16,500.00
+2025-10-13 | HK.00700 | 买入 100 股 @ 638.0 | 成本: 63,800.00
+2025-10-14 | HK.00700 | 买入 100 股 @ 620.0 | 成本: 62,000.00
+2025-10-17 | HK.00700 | 买入 100 股 @ 610.0 | 成本: 61,000.00
+2025-10-17 | HK.09988 | 买入 100 股 @ 155.0 | 成本: 15,500.00
+2025-11-06 | HK.00700 | 卖出 100 股 @ 644.0 | 收入: 64,400.00
+2025-11-07 | HK.00700 | 买入 100 股 @ 630.0 | 成本: 63,000.00
+2025-11-19 | HK.00700 | 买入 100 股 @ 620.0 | 成本: 62,000.00
+2025-11-21 | HK.09988 | 买入 100 股 @ 148.0 | 成本: 14,800.00
+2025-11-27 | HK.00700 | 买入 100 股 @ 610.0 | 成本: 61,000.00
+2025-12-04 | HK.00700 | 买入 100 股 @ 605.0 | 成本: 60,500.00
+2025-12-16 | HK.00700 | 买入 100 股 @ 595.0 | 成本: 59,500.00
+2025-12-16 | HK.09988 | 买入 100 股 @ 142.0 | 成本: 14,200.00
+2025-12-19 | HK.00700 | 卖出 100 股 @ 610.0 | 收入: 61,000.00
+2026-01-02 | HK.00700 | 卖出 100 股 @ 619.0 | 收入: 61,900.00
+2026-01-06 | HK.00700 | 卖出 100 股 @ 632.0 | 收入: 63,200.00
+2026-01-08 | HK.00700 | 买入 100 股 @ 610.0 | 成本: 61,000.00
+2026-01-13 | HK.09988 | 卖出 100 股 @ 159.0 | 收入: 15,900.00
+2026-01-14 | HK.00700 | 卖出 100 股 @ 635.0 | 收入: 63,500.00
+2026-01-14 | HK.09988 | 卖出 100 股 @ 165.0 | 收入: 16,500.00
+2026-01-15 | HK.09988 | 卖出 100 股 @ 169.5 | 收入: 16,950.00
+2026-01-19 | HK.00700 | 买入 100 股 @ 610.0 | 成本: 61,000.00
+2026-01-20 | HK.00700 | 买入 100 股 @ 600.0 | 成本: 60,000.00
+2026-02-03 | HK.00700 | 买入 100 股 @ 565.0 | 成本: 56,500.00
+2026-02-03 | HK.00700 | 买入 100 股 @ 580.0 | 成本: 58,000.00
+2026-02-03 | HK.00700 | 买入 100 股 @ 590.0 | 成本: 59,000.00
+2026-02-03 | HK.09988 | 买入 100 股 @ 157.5 | 成本: 15,750.00
+2026-02-06 | HK.09988 | 买入 100 股 @ 153.7 | 成本: 15,370.00
+2026-02-12 | HK.00700 | 买入 100 股 @ 535.0 | 成本: 53,500.00
+2026-02-20 | HK.00700 | 买入 100 股 @ 520.0 | 成本: 52,000.00
+2026-02-20 | HK.09988 | 买入 100 股 @ 149.0 | 成本: 14,900.00
+2026-02-26 | HK.09988 | 买入 100 股 @ 144.0 | 成本: 14,400.00
+------------------------------------------------------------
 
 ## 日K线指标说明
 | 字段名 | 数据类型 | 说明 |
@@ -34,134 +81,134 @@
 | last_close | float | 昨收价 |
 
 ## 最近真实 日K线 数据
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-08-14 00:00:00","open":600.0,"close":590.0,"high":600.0,"low":589.0,"volume":36339315,"turnover":21598286488.0,"pe_ratio":25.817,"turnover_rate":0.00396,"last_close":586.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-08-15 00:00:00","open":587.0,"close":592.0,"high":596.5,"low":584.5,"volume":22176876,"turnover":13122452831.0,"pe_ratio":25.904,"turnover_rate":0.00242,"last_close":590.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-08-18 00:00:00","open":594.0,"close":587.0,"high":596.0,"low":587.0,"volume":17590658,"turnover":10403063174.0,"pe_ratio":25.687,"turnover_rate":0.00192,"last_close":592.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-08-19 00:00:00","open":588.0,"close":592.5,"high":597.0,"low":583.0,"volume":16359474,"turnover":9665673921.0,"pe_ratio":25.928,"turnover_rate":0.00178,"last_close":587.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-08-20 00:00:00","open":589.0,"close":590.5,"high":594.5,"low":585.5,"volume":15952765,"turnover":9407128004.0,"pe_ratio":25.841,"turnover_rate":0.00174,"last_close":592.5}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-08-21 00:00:00","open":590.5,"close":593.0,"high":597.0,"low":589.5,"volume":14290178,"turnover":8479961596.0,"pe_ratio":25.95,"turnover_rate":0.00156,"last_close":590.5}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-08-22 00:00:00","open":599.0,"close":600.0,"high":606.5,"low":595.5,"volume":19378950,"turnover":11636897211.0,"pe_ratio":26.257,"turnover_rate":0.00211,"last_close":593.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-08-25 00:00:00","open":608.5,"close":614.5,"high":621.0,"low":608.0,"volume":25694519,"turnover":15801902006.0,"pe_ratio":26.892,"turnover_rate":0.0028,"last_close":600.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-08-26 00:00:00","open":612.0,"close":609.5,"high":618.0,"low":609.5,"volume":20656474,"turnover":12655282002.0,"pe_ratio":26.675,"turnover_rate":0.00225,"last_close":614.5}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-08-27 00:00:00","open":613.0,"close":599.0,"high":614.5,"low":595.0,"volume":21263402,"turnover":12841741312.0,"pe_ratio":26.215,"turnover_rate":0.00232,"last_close":609.5}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-08-28 00:00:00","open":595.0,"close":594.0,"high":599.0,"low":590.0,"volume":21712370,"turnover":12897917091.0,"pe_ratio":25.996,"turnover_rate":0.00237,"last_close":599.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-08-29 00:00:00","open":595.5,"close":596.5,"high":605.0,"low":594.0,"volume":18234935,"turnover":10915508651.0,"pe_ratio":26.106,"turnover_rate":0.00199,"last_close":594.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-09-01 00:00:00","open":605.0,"close":605.0,"high":610.0,"low":601.5,"volume":15958837,"turnover":9659266534.0,"pe_ratio":26.479,"turnover_rate":0.00174,"last_close":596.5}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-09-02 00:00:00","open":605.5,"close":600.5,"high":608.5,"low":599.0,"volume":14808157,"turnover":8931988423.0,"pe_ratio":26.282,"turnover_rate":0.00161,"last_close":605.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-09-03 00:00:00","open":606.5,"close":598.5,"high":613.0,"low":596.0,"volume":15523985,"turnover":9342307314.0,"pe_ratio":26.194,"turnover_rate":0.00169,"last_close":600.5}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-09-04 00:00:00","open":605.0,"close":592.5,"high":605.0,"low":591.0,"volume":18003934,"turnover":10709235662.0,"pe_ratio":25.933,"turnover_rate":0.00196,"last_close":598.5}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-09-05 00:00:00","open":599.5,"close":605.5,"high":609.0,"low":595.5,"volume":19047729,"turnover":11491491838.0,"pe_ratio":26.502,"turnover_rate":0.00208,"last_close":592.5}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-09-08 00:00:00","open":605.5,"close":617.5,"high":619.0,"low":605.0,"volume":21815489,"turnover":13369898978.0,"pe_ratio":27.027,"turnover_rate":0.00238,"last_close":605.5}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-09-09 00:00:00","open":620.0,"close":627.0,"high":628.0,"low":617.5,"volume":19871460,"turnover":12402857764.0,"pe_ratio":27.447,"turnover_rate":0.00217,"last_close":617.5}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-09-10 00:00:00","open":630.0,"close":633.5,"high":639.0,"low":628.0,"volume":19193376,"turnover":12190312543.0,"pe_ratio":27.732,"turnover_rate":0.00209,"last_close":627.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-09-11 00:00:00","open":633.0,"close":629.5,"high":633.0,"low":624.0,"volume":18191860,"turnover":11453335654.0,"pe_ratio":27.557,"turnover_rate":0.00198,"last_close":633.5}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-09-12 00:00:00","open":645.0,"close":643.5,"high":649.0,"low":642.0,"volume":20780375,"turnover":13422728502.0,"pe_ratio":28.128,"turnover_rate":0.00227,"last_close":629.5}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-09-15 00:00:00","open":646.0,"close":643.5,"high":648.5,"low":637.5,"volume":16371242,"turnover":10535685021.0,"pe_ratio":28.128,"turnover_rate":0.00179,"last_close":643.5}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-09-16 00:00:00","open":647.0,"close":645.0,"high":649.5,"low":640.5,"volume":13339685,"turnover":8609542624.0,"pe_ratio":28.199,"turnover_rate":0.00146,"last_close":643.5}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-09-17 00:00:00","open":646.5,"close":661.5,"high":663.5,"low":645.0,"volume":22349048,"turnover":14682542772.0,"pe_ratio":28.92,"turnover_rate":0.00244,"last_close":645.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-09-18 00:00:00","open":662.0,"close":642.0,"high":664.5,"low":635.5,"volume":29989898,"turnover":19432788713.0,"pe_ratio":28.068,"turnover_rate":0.00327,"last_close":661.5}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-09-19 00:00:00","open":647.0,"close":642.5,"high":647.0,"low":638.0,"volume":20805608,"turnover":13371042984.0,"pe_ratio":28.089,"turnover_rate":0.00227,"last_close":642.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-09-22 00:00:00","open":642.0,"close":641.0,"high":643.5,"low":634.0,"volume":12899662,"turnover":8240895170.0,"pe_ratio":28.024,"turnover_rate":0.00141,"last_close":642.5}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-09-23 00:00:00","open":641.5,"close":635.5,"high":643.5,"low":627.0,"volume":15293080,"turnover":9697688016.0,"pe_ratio":27.783,"turnover_rate":0.00167,"last_close":641.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-09-24 00:00:00","open":633.5,"close":648.5,"high":651.0,"low":628.0,"volume":18440788,"turnover":11854753855.0,"pe_ratio":28.352,"turnover_rate":0.00201,"last_close":635.5}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-09-25 00:00:00","open":651.0,"close":650.0,"high":659.0,"low":643.5,"volume":17384258,"turnover":11337641855.0,"pe_ratio":28.417,"turnover_rate":0.0019,"last_close":648.5}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-09-26 00:00:00","open":645.0,"close":644.0,"high":653.0,"low":640.0,"volume":19504951,"turnover":12617897920.0,"pe_ratio":28.156,"turnover_rate":0.00213,"last_close":650.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-09-29 00:00:00","open":649.5,"close":660.0,"high":664.5,"low":647.5,"volume":20489556,"turnover":13492727746.0,"pe_ratio":28.857,"turnover_rate":0.00224,"last_close":644.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-09-30 00:00:00","open":658.0,"close":663.0,"high":666.5,"low":657.5,"volume":20610633,"turnover":13653530623.0,"pe_ratio":28.955,"turnover_rate":0.00225,"last_close":660.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-10-02 00:00:00","open":667.5,"close":676.5,"high":683.0,"low":665.5,"volume":17137745,"turnover":11602077362.0,"pe_ratio":29.545,"turnover_rate":0.00187,"last_close":663.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-10-03 00:00:00","open":677.0,"close":673.5,"high":680.0,"low":670.0,"volume":7125093,"turnover":4802401785.0,"pe_ratio":29.414,"turnover_rate":0.00078,"last_close":676.5}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-10-06 00:00:00","open":675.0,"close":677.5,"high":682.5,"low":670.0,"volume":7828323,"turnover":5290177514.0,"pe_ratio":29.589,"turnover_rate":0.00086,"last_close":673.5}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-10-08 00:00:00","open":680.0,"close":675.0,"high":680.0,"low":669.5,"volume":10540730,"turnover":7110636784.0,"pe_ratio":29.479,"turnover_rate":0.00115,"last_close":677.5}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-10-09 00:00:00","open":675.0,"close":675.5,"high":681.0,"low":665.5,"volume":14454705,"turnover":9752967437.0,"pe_ratio":29.504,"turnover_rate":0.00158,"last_close":675.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-10-10 00:00:00","open":669.0,"close":651.5,"high":669.0,"low":647.5,"volume":19904705,"turnover":13051085790.0,"pe_ratio":28.455,"turnover_rate":0.00217,"last_close":675.5}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-10-13 00:00:00","open":630.0,"close":639.0,"high":648.5,"low":622.5,"volume":38012175,"turnover":24133784941.0,"pe_ratio":27.91,"turnover_rate":0.00415,"last_close":651.5}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-10-14 00:00:00","open":642.5,"close":621.0,"high":644.0,"low":617.0,"volume":26797863,"turnover":16792282108.0,"pe_ratio":27.123,"turnover_rate":0.00293,"last_close":639.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-10-15 00:00:00","open":624.5,"close":627.0,"high":633.0,"low":620.5,"volume":18381023,"turnover":11538283646.0,"pe_ratio":27.385,"turnover_rate":0.00201,"last_close":621.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-10-16 00:00:00","open":626.0,"close":620.0,"high":629.0,"low":615.5,"volume":14285465,"turnover":8878516698.0,"pe_ratio":27.08,"turnover_rate":0.00156,"last_close":627.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-10-17 00:00:00","open":618.5,"close":608.0,"high":620.5,"low":602.5,"volume":18654519,"turnover":11370789563.0,"pe_ratio":26.556,"turnover_rate":0.00204,"last_close":620.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-10-20 00:00:00","open":624.0,"close":627.5,"high":632.5,"low":621.5,"volume":14963360,"turnover":9379379881.0,"pe_ratio":27.407,"turnover_rate":0.00163,"last_close":608.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-10-21 00:00:00","open":643.0,"close":630.5,"high":644.0,"low":630.0,"volume":14171988,"turnover":9028696332.0,"pe_ratio":27.538,"turnover_rate":0.00155,"last_close":627.5}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-10-22 00:00:00","open":626.0,"close":623.5,"high":629.0,"low":616.5,"volume":9979448,"turnover":6212763895.0,"pe_ratio":27.233,"turnover_rate":0.00109,"last_close":630.5}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-10-23 00:00:00","open":620.0,"close":633.0,"high":636.0,"low":618.0,"volume":12419348,"turnover":7782734766.0,"pe_ratio":27.647,"turnover_rate":0.00136,"last_close":623.5}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-10-24 00:00:00","open":639.0,"close":637.5,"high":641.5,"low":633.5,"volume":11997034,"turnover":7648872118.0,"pe_ratio":27.844,"turnover_rate":0.00131,"last_close":633.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-10-27 00:00:00","open":649.0,"close":656.0,"high":656.0,"low":646.0,"volume":16043970,"turnover":10461683006.0,"pe_ratio":28.652,"turnover_rate":0.00175,"last_close":637.5}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-10-28 00:00:00","open":656.0,"close":645.0,"high":656.0,"low":641.0,"volume":16295470,"turnover":10562802667.0,"pe_ratio":28.172,"turnover_rate":0.00178,"last_close":656.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-10-30 00:00:00","open":657.0,"close":651.0,"high":664.0,"low":645.0,"volume":21772780,"turnover":14256261211.0,"pe_ratio":28.434,"turnover_rate":0.00238,"last_close":645.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-10-31 00:00:00","open":651.5,"close":629.0,"high":655.0,"low":629.0,"volume":20578283,"turnover":13087941470.0,"pe_ratio":27.473,"turnover_rate":0.00225,"last_close":651.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-11-03 00:00:00","open":630.5,"close":628.0,"high":634.0,"low":622.5,"volume":11591004,"turnover":7277219053.0,"pe_ratio":27.429,"turnover_rate":0.00127,"last_close":629.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-11-04 00:00:00","open":631.0,"close":629.0,"high":640.0,"low":625.5,"volume":14972125,"turnover":9460748363.0,"pe_ratio":27.473,"turnover_rate":0.00164,"last_close":628.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-11-05 00:00:00","open":621.0,"close":629.0,"high":632.0,"low":613.0,"volume":13309811,"turnover":8309972605.0,"pe_ratio":27.473,"turnover_rate":0.00145,"last_close":629.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-11-06 00:00:00","open":629.5,"close":644.0,"high":645.5,"low":629.5,"volume":13081287,"turnover":8382246994.0,"pe_ratio":28.128,"turnover_rate":0.00143,"last_close":629.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-11-07 00:00:00","open":638.0,"close":634.0,"high":643.0,"low":628.5,"volume":13314360,"turnover":8434344187.0,"pe_ratio":27.665,"turnover_rate":0.00146,"last_close":644.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-11-10 00:00:00","open":641.0,"close":649.5,"high":651.0,"low":641.0,"volume":14513815,"turnover":9386838459.0,"pe_ratio":28.341,"turnover_rate":0.00159,"last_close":634.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-11-11 00:00:00","open":662.0,"close":650.0,"high":662.0,"low":641.0,"volume":13087772,"turnover":8483781693.0,"pe_ratio":28.363,"turnover_rate":0.00143,"last_close":649.5}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-11-12 00:00:00","open":655.0,"close":657.0,"high":658.5,"low":652.0,"volume":13658568,"turnover":8960743999.0,"pe_ratio":28.668,"turnover_rate":0.00149,"last_close":650.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-11-13 00:00:00","open":649.5,"close":656.0,"high":660.0,"low":645.0,"volume":17299913,"turnover":11283368344.0,"pe_ratio":28.625,"turnover_rate":0.00189,"last_close":657.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-11-14 00:00:00","open":645.0,"close":641.0,"high":659.0,"low":640.0,"volume":19956444,"turnover":12900520613.0,"pe_ratio":27.97,"turnover_rate":0.00218,"last_close":656.0}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-08-14 00:00:00","open":124.8,"close":121.8,"high":125.2,"low":121.0,"volume":83916791,"turnover":10311184942.0,"pe_ratio":16.562,"turnover_rate":0.0044,"last_close":123.7}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-08-15 00:00:00","open":119.3,"close":118.1,"high":119.8,"low":117.8,"volume":110541625,"turnover":13097069023.0,"pe_ratio":16.059,"turnover_rate":0.00579,"last_close":121.8}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-08-18 00:00:00","open":118.3,"close":118.6,"high":120.8,"low":118.3,"volume":76093381,"turnover":9087497702.0,"pe_ratio":16.127,"turnover_rate":0.00399,"last_close":118.1}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-08-19 00:00:00","open":118.4,"close":118.3,"high":119.7,"low":117.9,"volume":55732895,"turnover":6612360159.0,"pe_ratio":16.086,"turnover_rate":0.00292,"last_close":118.6}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-08-20 00:00:00","open":117.2,"close":117.5,"high":118.0,"low":116.1,"volume":62830049,"turnover":7348177075.0,"pe_ratio":15.975,"turnover_rate":0.00329,"last_close":118.3}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-08-21 00:00:00","open":117.3,"close":115.7,"high":117.6,"low":115.0,"volume":66716053,"turnover":7746247569.0,"pe_ratio":15.73,"turnover_rate":0.0035,"last_close":117.5}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-08-22 00:00:00","open":115.5,"close":118.0,"high":118.3,"low":115.3,"volume":73604857,"turnover":8619159505.0,"pe_ratio":16.043,"turnover_rate":0.00386,"last_close":115.7}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-08-25 00:00:00","open":120.4,"close":124.5,"high":126.0,"low":120.4,"volume":162992103,"turnover":20176124341.0,"pe_ratio":16.927,"turnover_rate":0.00855,"last_close":118.0}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-08-26 00:00:00","open":122.0,"close":121.3,"high":123.9,"low":121.1,"volume":90253630,"turnover":11045099957.0,"pe_ratio":16.492,"turnover_rate":0.00473,"last_close":124.5}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-08-27 00:00:00","open":121.3,"close":121.5,"high":124.3,"low":121.0,"volume":114213258,"turnover":13972168865.0,"pe_ratio":16.519,"turnover_rate":0.00599,"last_close":121.3}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-08-28 00:00:00","open":119.1,"close":115.8,"high":119.3,"low":115.6,"volume":171962832,"turnover":20064065645.0,"pe_ratio":15.744,"turnover_rate":0.00902,"last_close":121.5}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-08-29 00:00:00","open":116.8,"close":115.7,"high":119.0,"low":115.7,"volume":110429482,"turnover":12885953477.0,"pe_ratio":15.728,"turnover_rate":0.00579,"last_close":115.8}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-09-01 00:00:00","open":133.0,"close":137.1,"high":138.0,"low":133.0,"volume":404948185,"turnover":54916950662.0,"pe_ratio":18.637,"turnover_rate":0.02123,"last_close":115.7}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-09-02 00:00:00","open":139.9,"close":134.7,"high":139.9,"low":134.7,"volume":166594096,"turnover":22727724666.0,"pe_ratio":18.311,"turnover_rate":0.00873,"last_close":137.1}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-09-03 00:00:00","open":136.5,"close":134.1,"high":137.8,"low":133.0,"volume":104631522,"turnover":14119905258.0,"pe_ratio":18.23,"turnover_rate":0.00549,"last_close":134.7}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-09-04 00:00:00","open":134.3,"close":129.8,"high":134.8,"low":128.5,"volume":148595855,"turnover":19356945374.0,"pe_ratio":17.645,"turnover_rate":0.00779,"last_close":134.1}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-09-05 00:00:00","open":128.5,"close":131.8,"high":133.0,"low":128.1,"volume":127450276,"turnover":16688212150.0,"pe_ratio":17.917,"turnover_rate":0.00668,"last_close":129.8}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-09-08 00:00:00","open":133.2,"close":137.3,"high":138.0,"low":133.1,"volume":147299900,"turnover":20077519569.0,"pe_ratio":18.665,"turnover_rate":0.00772,"last_close":131.8}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-09-09 00:00:00","open":138.6,"close":141.9,"high":142.8,"low":138.0,"volume":181120225,"turnover":25571992786.0,"pe_ratio":19.29,"turnover_rate":0.0095,"last_close":137.3}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-09-10 00:00:00","open":144.7,"close":142.8,"high":147.9,"low":142.6,"volume":181722198,"turnover":26367188569.0,"pe_ratio":19.412,"turnover_rate":0.00953,"last_close":141.9}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-09-11 00:00:00","open":140.9,"close":143.3,"high":146.5,"low":139.1,"volume":174456621,"turnover":24964367964.0,"pe_ratio":19.48,"turnover_rate":0.00915,"last_close":142.8}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-09-12 00:00:00","open":151.7,"close":151.1,"high":153.8,"low":150.1,"volume":170663495,"turnover":25931662331.0,"pe_ratio":20.541,"turnover_rate":0.00895,"last_close":143.3}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-09-15 00:00:00","open":150.4,"close":154.6,"high":156.8,"low":150.1,"volume":146193613,"turnover":22604762191.0,"pe_ratio":21.016,"turnover_rate":0.00767,"last_close":151.1}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-09-16 00:00:00","open":154.0,"close":153.5,"high":156.8,"low":152.5,"volume":111088746,"turnover":17147548902.0,"pe_ratio":20.867,"turnover_rate":0.00582,"last_close":154.6}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-09-17 00:00:00","open":157.7,"close":161.6,"high":162.3,"low":156.7,"volume":156646724,"turnover":25103703723.0,"pe_ratio":21.968,"turnover_rate":0.00821,"last_close":153.5}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-09-18 00:00:00","open":162.1,"close":158.4,"high":164.8,"low":156.3,"volume":209809246,"turnover":33703774014.0,"pe_ratio":21.533,"turnover_rate":0.011,"last_close":161.6}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-09-19 00:00:00","open":158.9,"close":159.1,"high":162.8,"low":156.6,"volume":138827373,"turnover":22168296850.0,"pe_ratio":21.628,"turnover_rate":0.00728,"last_close":158.4}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-09-22 00:00:00","open":157.6,"close":159.2,"high":161.5,"low":157.3,"volume":103208970,"turnover":16452375762.0,"pe_ratio":21.642,"turnover_rate":0.00541,"last_close":159.1}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-09-23 00:00:00","open":160.0,"close":159.4,"high":163.1,"low":156.7,"volume":119175251,"turnover":19010074240.0,"pe_ratio":21.669,"turnover_rate":0.00625,"last_close":159.2}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-09-24 00:00:00","open":158.5,"close":174.0,"high":174.9,"low":157.6,"volume":261023658,"turnover":44091254771.0,"pe_ratio":23.654,"turnover_rate":0.01369,"last_close":159.4}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-09-25 00:00:00","open":174.0,"close":172.0,"high":177.8,"low":171.1,"volume":172333447,"turnover":30033316446.0,"pe_ratio":23.382,"turnover_rate":0.00904,"last_close":174.0}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-09-26 00:00:00","open":168.4,"close":166.5,"high":171.9,"low":165.0,"volume":152987253,"turnover":25743281451.0,"pe_ratio":22.634,"turnover_rate":0.00802,"last_close":172.0}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-09-29 00:00:00","open":166.9,"close":173.4,"high":174.3,"low":166.9,"volume":134259119,"turnover":23097912213.0,"pe_ratio":23.572,"turnover_rate":0.00704,"last_close":166.5}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-09-30 00:00:00","open":176.6,"close":177.0,"high":178.0,"low":173.7,"volume":135460219,"turnover":23892748734.0,"pe_ratio":24.061,"turnover_rate":0.0071,"last_close":173.4}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-10-02 00:00:00","open":179.7,"close":183.1,"high":185.0,"low":179.1,"volume":96036992,"turnover":17573327509.0,"pe_ratio":24.891,"turnover_rate":0.00504,"last_close":177.0}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-10-03 00:00:00","open":185.0,"close":185.1,"high":186.2,"low":183.3,"volume":56780997,"turnover":10471400436.0,"pe_ratio":25.163,"turnover_rate":0.00298,"last_close":183.1}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-10-06 00:00:00","open":181.8,"close":180.5,"high":183.8,"low":179.8,"volume":49211980,"turnover":8914874905.0,"pe_ratio":24.537,"turnover_rate":0.00258,"last_close":185.1}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-10-08 00:00:00","open":178.1,"close":177.6,"high":178.3,"low":173.5,"volume":75252197,"turnover":13249751058.0,"pe_ratio":24.143,"turnover_rate":0.00395,"last_close":180.5}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-10-09 00:00:00","open":179.0,"close":173.3,"high":179.0,"low":171.5,"volume":158029622,"turnover":27615986108.0,"pe_ratio":23.578,"turnover_rate":0.00828,"last_close":177.6}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-10-10 00:00:00","open":169.1,"close":165.4,"high":170.3,"low":164.8,"volume":186753966,"turnover":31172922959.0,"pe_ratio":22.503,"turnover_rate":0.00978,"last_close":173.3}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-10-13 00:00:00","open":159.0,"close":162.6,"high":163.6,"low":156.1,"volume":282816644,"turnover":45255101764.0,"pe_ratio":22.122,"turnover_rate":0.01482,"last_close":165.4}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-10-14 00:00:00","open":164.8,"close":155.6,"high":166.1,"low":154.0,"volume":201534774,"turnover":32056081179.0,"pe_ratio":21.17,"turnover_rate":0.01056,"last_close":162.6}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-10-15 00:00:00","open":158.7,"close":161.6,"high":162.7,"low":156.1,"volume":111159729,"turnover":17818995617.0,"pe_ratio":21.986,"turnover_rate":0.00582,"last_close":155.6}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-10-16 00:00:00","open":162.6,"close":161.2,"high":164.2,"low":158.6,"volume":73190193,"turnover":11792460019.0,"pe_ratio":21.931,"turnover_rate":0.00383,"last_close":161.6}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-10-17 00:00:00","open":161.0,"close":154.4,"high":161.0,"low":153.0,"volume":133552318,"turnover":20779808164.0,"pe_ratio":21.006,"turnover_rate":0.007,"last_close":161.2}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-10-20 00:00:00","open":162.1,"close":161.9,"high":162.9,"low":160.0,"volume":98042110,"turnover":15824574921.0,"pe_ratio":22.027,"turnover_rate":0.00514,"last_close":154.4}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-10-21 00:00:00","open":167.5,"close":165.1,"high":169.0,"low":164.8,"volume":110624314,"turnover":18485325920.0,"pe_ratio":22.462,"turnover_rate":0.0058,"last_close":161.9}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-10-22 00:00:00","open":162.7,"close":161.9,"high":163.6,"low":160.0,"volume":67640668,"turnover":10948294006.0,"pe_ratio":22.027,"turnover_rate":0.00354,"last_close":165.1}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-10-23 00:00:00","open":161.9,"close":164.6,"high":165.5,"low":159.1,"volume":86447894,"turnover":14053583938.0,"pe_ratio":22.394,"turnover_rate":0.00453,"last_close":161.9}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-10-24 00:00:00","open":168.0,"close":168.3,"high":169.3,"low":166.6,"volume":84064278,"turnover":14125845046.0,"pe_ratio":22.897,"turnover_rate":0.0044,"last_close":164.6}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-10-27 00:00:00","open":174.8,"close":173.6,"high":175.0,"low":172.1,"volume":96795907,"turnover":16798028487.0,"pe_ratio":23.619,"turnover_rate":0.00507,"last_close":168.3}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-10-28 00:00:00","open":174.0,"close":171.0,"high":174.2,"low":169.5,"volume":78492657,"turnover":13467273059.0,"pe_ratio":23.265,"turnover_rate":0.00411,"last_close":173.6}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-10-30 00:00:00","open":173.4,"close":172.1,"high":174.8,"low":169.0,"volume":112254088,"turnover":19352270084.0,"pe_ratio":23.414,"turnover_rate":0.00588,"last_close":171.0}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-10-31 00:00:00","open":169.8,"close":165.1,"high":170.6,"low":165.1,"volume":97457096,"turnover":16298385332.0,"pe_ratio":22.462,"turnover_rate":0.00511,"last_close":172.1}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-11-03 00:00:00","open":164.9,"close":163.2,"high":166.3,"low":161.5,"volume":74773287,"turnover":12210171385.0,"pe_ratio":22.204,"turnover_rate":0.00392,"last_close":165.1}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-11-04 00:00:00","open":164.0,"close":159.0,"high":164.0,"low":158.1,"volume":89529769,"turnover":14354452995.0,"pe_ratio":21.632,"turnover_rate":0.00469,"last_close":163.2}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-11-05 00:00:00","open":156.6,"close":158.5,"high":159.3,"low":154.2,"volume":94071358,"turnover":14714389756.0,"pe_ratio":21.564,"turnover_rate":0.00493,"last_close":159.0}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-11-06 00:00:00","open":160.8,"close":165.0,"high":165.3,"low":159.9,"volume":83528391,"turnover":13600934138.0,"pe_ratio":22.448,"turnover_rate":0.00438,"last_close":158.5}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-11-07 00:00:00","open":163.2,"close":160.1,"high":163.2,"low":158.9,"volume":66709927,"turnover":10713546254.0,"pe_ratio":21.782,"turnover_rate":0.00349,"last_close":165.0}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-11-10 00:00:00","open":162.8,"close":163.4,"high":164.2,"low":160.4,"volume":57596575,"turnover":9360847588.0,"pe_ratio":22.231,"turnover_rate":0.00302,"last_close":160.1}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-11-11 00:00:00","open":161.5,"close":160.4,"high":162.4,"low":158.6,"volume":73054852,"turnover":11669987979.0,"pe_ratio":21.823,"turnover_rate":0.00383,"last_close":163.4}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-11-12 00:00:00","open":157.1,"close":156.8,"high":158.4,"low":155.2,"volume":96741580,"turnover":15147545432.0,"pe_ratio":21.333,"turnover_rate":0.00507,"last_close":160.4}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-11-13 00:00:00","open":153.9,"close":162.0,"high":166.0,"low":153.3,"volume":155447392,"turnover":24785001720.0,"pe_ratio":22.04,"turnover_rate":0.00814,"last_close":156.8}
-{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-11-14 00:00:00","open":156.5,"close":154.9,"high":158.4,"low":154.5,"volume":101354219,"turnover":15847725884.0,"pe_ratio":21.074,"turnover_rate":0.00531,"last_close":162.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2025-11-27 00:00:00","open":618.0,"close":611.5,"high":620.5,"low":609.0,"volume":15493209,"turnover":9503092331.0,"pe_ratio":26.683,"turnover_rate":0.00169,"last_close":619.5}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2025-11-28 00:00:00","open":611.5,"close":611.5,"high":617.0,"low":608.5,"volume":13216245,"turnover":8086903031.0,"pe_ratio":26.683,"turnover_rate":0.00145,"last_close":611.5}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2025-12-01 00:00:00","open":613.5,"close":619.5,"high":623.0,"low":613.0,"volume":12643338,"turnover":7813043126.0,"pe_ratio":27.032,"turnover_rate":0.00138,"last_close":611.5}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2025-12-02 00:00:00","open":625.5,"close":617.0,"high":626.0,"low":615.0,"volume":11460186,"turnover":7090479118.0,"pe_ratio":26.923,"turnover_rate":0.00125,"last_close":619.5}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2025-12-03 00:00:00","open":616.0,"close":611.0,"high":616.0,"low":608.5,"volume":11002158,"turnover":6722780099.0,"pe_ratio":26.661,"turnover_rate":0.0012,"last_close":617.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2025-12-04 00:00:00","open":610.0,"close":612.0,"high":613.0,"low":605.0,"volume":15329748,"turnover":9330280581.0,"pe_ratio":26.705,"turnover_rate":0.00168,"last_close":611.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2025-12-05 00:00:00","open":605.0,"close":610.0,"high":611.0,"low":604.0,"volume":14638391,"turnover":8902501918.0,"pe_ratio":26.617,"turnover_rate":0.0016,"last_close":612.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2025-12-08 00:00:00","open":607.5,"close":605.0,"high":609.5,"low":604.0,"volume":13421327,"turnover":8134379992.0,"pe_ratio":26.399,"turnover_rate":0.00147,"last_close":610.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2025-12-09 00:00:00","open":609.5,"close":602.5,"high":610.0,"low":596.0,"volume":17431321,"turnover":10484820078.0,"pe_ratio":26.29,"turnover_rate":0.00191,"last_close":605.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2025-12-10 00:00:00","open":602.0,"close":603.0,"high":603.0,"low":595.0,"volume":14750743,"turnover":8842611858.0,"pe_ratio":26.312,"turnover_rate":0.00161,"last_close":602.5}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2025-12-11 00:00:00","open":609.0,"close":601.5,"high":612.0,"low":599.0,"volume":12480887,"turnover":7536004575.0,"pe_ratio":26.246,"turnover_rate":0.00136,"last_close":603.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2025-12-12 00:00:00","open":608.0,"close":616.0,"high":616.0,"low":601.5,"volume":17825495,"turnover":10871536434.0,"pe_ratio":26.879,"turnover_rate":0.00195,"last_close":601.5}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2025-12-15 00:00:00","open":606.0,"close":603.0,"high":608.5,"low":602.0,"volume":15165502,"turnover":9186457680.0,"pe_ratio":26.271,"turnover_rate":0.00166,"last_close":616.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2025-12-16 00:00:00","open":602.5,"close":596.5,"high":603.0,"low":592.0,"volume":15987678,"turnover":9521250035.0,"pe_ratio":25.987,"turnover_rate":0.00175,"last_close":603.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2025-12-17 00:00:00","open":597.0,"close":605.0,"high":606.0,"low":594.5,"volume":14824785,"turnover":8913471531.0,"pe_ratio":26.358,"turnover_rate":0.00162,"last_close":596.5}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2025-12-18 00:00:00","open":601.0,"close":605.0,"high":606.0,"low":599.0,"volume":10153604,"turnover":6118191950.0,"pe_ratio":26.358,"turnover_rate":0.00111,"last_close":605.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2025-12-19 00:00:00","open":610.0,"close":614.0,"high":617.5,"low":607.0,"volume":17765762,"turnover":10899320074.0,"pe_ratio":26.75,"turnover_rate":0.00195,"last_close":605.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2025-12-22 00:00:00","open":620.0,"close":614.5,"high":621.5,"low":610.0,"volume":13868060,"turnover":8519903911.0,"pe_ratio":26.772,"turnover_rate":0.00152,"last_close":614.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2025-12-23 00:00:00","open":613.5,"close":602.0,"high":614.5,"low":601.5,"volume":15623392,"turnover":9448325534.0,"pe_ratio":26.227,"turnover_rate":0.00171,"last_close":614.5}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2025-12-24 00:00:00","open":598.0,"close":603.0,"high":604.5,"low":598.0,"volume":7324553,"turnover":4407029326.0,"pe_ratio":26.271,"turnover_rate":0.0008,"last_close":602.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2025-12-29 00:00:00","open":606.0,"close":596.5,"high":611.0,"low":596.0,"volume":18502650,"turnover":11132678825.0,"pe_ratio":25.987,"turnover_rate":0.00203,"last_close":603.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2025-12-30 00:00:00","open":598.5,"close":600.0,"high":601.0,"low":594.0,"volume":13582535,"turnover":8129374890.0,"pe_ratio":26.14,"turnover_rate":0.00149,"last_close":596.5}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2025-12-31 00:00:00","open":597.5,"close":599.0,"high":602.5,"low":596.0,"volume":10838209,"turnover":6491607235.0,"pe_ratio":26.067,"turnover_rate":0.00119,"last_close":600.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-01-02 00:00:00","open":600.5,"close":623.0,"high":624.5,"low":600.5,"volume":16200058,"turnover":10010377766.0,"pe_ratio":27.111,"turnover_rate":0.00178,"last_close":599.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-01-05 00:00:00","open":624.0,"close":624.5,"high":628.0,"low":615.5,"volume":19947025,"turnover":12449753887.0,"pe_ratio":27.176,"turnover_rate":0.00219,"last_close":623.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-01-06 00:00:00","open":627.0,"close":632.5,"high":638.5,"low":626.0,"volume":24168431,"turnover":15313854511.0,"pe_ratio":27.525,"turnover_rate":0.00265,"last_close":624.5}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-01-07 00:00:00","open":627.5,"close":624.5,"high":629.5,"low":615.0,"volume":21378622,"turnover":13276699447.0,"pe_ratio":27.178,"turnover_rate":0.00234,"last_close":632.5}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-01-08 00:00:00","open":618.5,"close":616.0,"high":621.0,"low":610.0,"volume":18742539,"turnover":11517454670.0,"pe_ratio":26.808,"turnover_rate":0.00206,"last_close":624.5}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-01-09 00:00:00","open":616.0,"close":611.0,"high":617.0,"low":610.0,"volume":17813669,"turnover":10905861546.0,"pe_ratio":26.59,"turnover_rate":0.00195,"last_close":616.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-01-12 00:00:00","open":616.0,"close":623.0,"high":627.5,"low":613.5,"volume":27530129,"turnover":17094929270.0,"pe_ratio":27.112,"turnover_rate":0.00302,"last_close":611.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-01-13 00:00:00","open":637.0,"close":627.5,"high":639.0,"low":622.5,"volume":24212695,"turnover":15223559034.0,"pe_ratio":27.311,"turnover_rate":0.00265,"last_close":623.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-01-14 00:00:00","open":634.0,"close":633.0,"high":638.5,"low":626.0,"volume":28677291,"turnover":18145947867.0,"pe_ratio":27.555,"turnover_rate":0.00314,"last_close":627.5}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-01-15 00:00:00","open":631.0,"close":622.0,"high":632.5,"low":618.5,"volume":26194252,"turnover":16373184856.0,"pe_ratio":27.076,"turnover_rate":0.00287,"last_close":633.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-01-16 00:00:00","open":627.0,"close":617.5,"high":630.0,"low":613.5,"volume":20616793,"turnover":12738149855.0,"pe_ratio":26.88,"turnover_rate":0.00226,"last_close":622.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-01-19 00:00:00","open":613.5,"close":610.0,"high":614.5,"low":608.5,"volume":13233330,"turnover":8085158357.0,"pe_ratio":26.554,"turnover_rate":0.00145,"last_close":617.5}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-01-20 00:00:00","open":601.0,"close":601.0,"high":607.0,"low":598.0,"volume":24332228,"turnover":14637834605.0,"pe_ratio":26.162,"turnover_rate":0.00267,"last_close":610.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-01-21 00:00:00","open":598.0,"close":602.5,"high":606.0,"low":598.0,"volume":16003431,"turnover":9625116160.0,"pe_ratio":26.227,"turnover_rate":0.00175,"last_close":601.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-01-22 00:00:00","open":604.5,"close":597.5,"high":605.5,"low":596.0,"volume":27168713,"turnover":16278457326.0,"pe_ratio":26.009,"turnover_rate":0.00298,"last_close":602.5}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-01-23 00:00:00","open":597.5,"close":595.0,"high":602.0,"low":595.0,"volume":19177660,"turnover":11445681352.0,"pe_ratio":25.901,"turnover_rate":0.0021,"last_close":597.5}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-01-26 00:00:00","open":595.0,"close":599.5,"high":605.0,"low":594.0,"volume":17439619,"turnover":10437731314.0,"pe_ratio":26.096,"turnover_rate":0.00191,"last_close":595.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-01-27 00:00:00","open":600.0,"close":607.0,"high":610.5,"low":598.5,"volume":23887447,"turnover":14458720764.0,"pe_ratio":26.423,"turnover_rate":0.00262,"last_close":599.5}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-01-28 00:00:00","open":613.0,"close":621.0,"high":623.0,"low":610.5,"volume":25577066,"turnover":15812292185.0,"pe_ratio":27.032,"turnover_rate":0.0028,"last_close":607.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-01-29 00:00:00","open":614.5,"close":622.0,"high":625.0,"low":612.5,"volume":22951530,"turnover":14255212249.0,"pe_ratio":27.076,"turnover_rate":0.00252,"last_close":621.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-01-30 00:00:00","open":615.0,"close":606.0,"high":619.5,"low":605.5,"volume":21479886,"turnover":13126677309.0,"pe_ratio":26.379,"turnover_rate":0.00235,"last_close":622.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-02-02 00:00:00","open":598.0,"close":598.5,"high":604.5,"low":590.5,"volume":27926332,"turnover":16667624948.0,"pe_ratio":26.053,"turnover_rate":0.00306,"last_close":606.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-02-03 00:00:00","open":598.5,"close":581.0,"high":601.5,"low":561.0,"volume":65128647,"turnover":37562016592.0,"pe_ratio":25.291,"turnover_rate":0.00714,"last_close":598.5}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-02-04 00:00:00","open":572.0,"close":558.0,"high":574.5,"low":558.0,"volume":60374834,"turnover":34030535809.0,"pe_ratio":24.29,"turnover_rate":0.00662,"last_close":581.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-02-05 00:00:00","open":550.0,"close":558.5,"high":561.5,"low":541.0,"volume":79306977,"turnover":43460897175.0,"pe_ratio":24.267,"turnover_rate":0.00871,"last_close":558.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-02-06 00:00:00","open":546.0,"close":547.5,"high":557.5,"low":543.0,"volume":35402860,"turnover":19472346757.0,"pe_ratio":23.789,"turnover_rate":0.00389,"last_close":558.5}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-02-09 00:00:00","open":550.0,"close":560.0,"high":562.5,"low":550.0,"volume":26375723,"turnover":14680203940.0,"pe_ratio":24.333,"turnover_rate":0.0029,"last_close":547.5}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-02-10 00:00:00","open":563.0,"close":551.0,"high":566.0,"low":547.0,"volume":29211865,"turnover":16193933207.0,"pe_ratio":23.941,"turnover_rate":0.00321,"last_close":560.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-02-11 00:00:00","open":543.0,"close":548.0,"high":550.5,"low":543.0,"volume":23759058,"turnover":12991880860.0,"pe_ratio":23.811,"turnover_rate":0.00261,"last_close":551.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-02-12 00:00:00","open":537.0,"close":535.5,"high":541.0,"low":530.5,"volume":39790780,"turnover":21258224270.0,"pe_ratio":23.268,"turnover_rate":0.00437,"last_close":548.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-02-13 00:00:00","open":525.5,"close":532.0,"high":534.5,"low":525.0,"volume":26900740,"turnover":14233832931.0,"pe_ratio":23.116,"turnover_rate":0.00295,"last_close":535.5}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-02-16 00:00:00","open":530.0,"close":533.0,"high":535.0,"low":527.5,"volume":7224483,"turnover":3838968116.0,"pe_ratio":23.159,"turnover_rate":0.00079,"last_close":532.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-02-20 00:00:00","open":531.5,"close":522.0,"high":533.0,"low":518.0,"volume":21351884,"turnover":11171863721.0,"pe_ratio":22.681,"turnover_rate":0.00234,"last_close":533.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-02-23 00:00:00","open":529.0,"close":538.0,"high":543.0,"low":528.0,"volume":22136687,"turnover":11883268465.0,"pe_ratio":23.377,"turnover_rate":0.00243,"last_close":522.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-02-24 00:00:00","open":534.5,"close":520.0,"high":534.5,"low":516.0,"volume":36134943,"turnover":18828896718.0,"pe_ratio":22.594,"turnover_rate":0.00397,"last_close":538.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-02-25 00:00:00","open":522.5,"close":522.5,"high":529.0,"low":522.0,"volume":22838866,"turnover":11981117681.0,"pe_ratio":22.703,"turnover_rate":0.00251,"last_close":520.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-02-26 00:00:00","open":529.0,"close":512.0,"high":529.5,"low":512.0,"volume":25547825,"turnover":13216109120.0,"pe_ratio":22.247,"turnover_rate":0.00281,"last_close":522.5}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-02-27 00:00:00","open":510.5,"close":518.0,"high":530.5,"low":510.5,"volume":32229030,"turnover":16775665867.0,"pe_ratio":22.508,"turnover_rate":0.00354,"last_close":512.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-03-02 00:00:00","open":511.5,"close":514.0,"high":520.0,"low":507.0,"volume":30816358,"turnover":15821425593.0,"pe_ratio":22.334,"turnover_rate":0.00338,"last_close":518.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-03-03 00:00:00","open":518.0,"close":510.5,"high":525.5,"low":510.5,"volume":27370602,"turnover":14133900989.0,"pe_ratio":22.182,"turnover_rate":0.00301,"last_close":514.0}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2026-03-04 00:00:00","open":506.0,"close":506.0,"high":515.0,"low":498.8,"volume":32965198,"turnover":16643464030.0,"pe_ratio":21.986,"turnover_rate":0.00362,"last_close":510.5}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-11-27 00:00:00","open":154.0,"close":150.6,"high":154.9,"low":150.1,"volume":103303822,"turnover":15705984411.0,"pe_ratio":20.489,"turnover_rate":0.00541,"last_close":154.8}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-11-28 00:00:00","open":151.8,"close":151.5,"high":153.2,"low":151.0,"volume":66572166,"turnover":10111444029.0,"pe_ratio":20.612,"turnover_rate":0.00349,"last_close":150.6}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-12-01 00:00:00","open":153.0,"close":154.9,"high":156.9,"low":152.0,"volume":93259220,"turnover":14494289977.0,"pe_ratio":21.074,"turnover_rate":0.00489,"last_close":151.5}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-12-02 00:00:00","open":160.1,"close":157.0,"high":160.1,"low":156.3,"volume":74133971,"turnover":11717077172.0,"pe_ratio":21.36,"turnover_rate":0.00388,"last_close":154.9}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-12-03 00:00:00","open":155.8,"close":153.6,"high":156.6,"low":153.1,"volume":54076752,"turnover":8332496257.0,"pe_ratio":20.897,"turnover_rate":0.00283,"last_close":157.0}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-12-04 00:00:00","open":153.1,"close":154.4,"high":155.1,"low":152.5,"volume":57110210,"turnover":8771618515.0,"pe_ratio":21.006,"turnover_rate":0.00299,"last_close":153.6}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-12-05 00:00:00","open":153.2,"close":155.0,"high":155.1,"low":152.6,"volume":78815068,"turnover":12166046512.0,"pe_ratio":21.088,"turnover_rate":0.00413,"last_close":154.4}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-12-08 00:00:00","open":155.0,"close":153.4,"high":155.5,"low":152.8,"volume":75226835,"turnover":11582000738.0,"pe_ratio":20.87,"turnover_rate":0.00394,"last_close":155.0}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-12-09 00:00:00","open":155.1,"close":150.9,"high":156.8,"low":150.4,"volume":69789164,"turnover":10648884303.0,"pe_ratio":20.53,"turnover_rate":0.00366,"last_close":153.4}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-12-10 00:00:00","open":150.5,"close":153.2,"high":153.4,"low":149.6,"volume":61369895,"turnover":9321713276.0,"pe_ratio":20.843,"turnover_rate":0.00321,"last_close":150.9}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-12-11 00:00:00","open":155.0,"close":150.6,"high":155.5,"low":150.5,"volume":59433982,"turnover":9052893590.0,"pe_ratio":20.489,"turnover_rate":0.00311,"last_close":153.2}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-12-12 00:00:00","open":152.7,"close":154.1,"high":154.1,"low":150.8,"volume":88532981,"turnover":13539596437.0,"pe_ratio":20.965,"turnover_rate":0.00464,"last_close":150.6}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-12-15 00:00:00","open":150.8,"close":148.6,"high":151.7,"low":148.5,"volume":94298860,"turnover":14139023980.0,"pe_ratio":20.217,"turnover_rate":0.00494,"last_close":154.1}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-12-16 00:00:00","open":146.9,"close":144.2,"high":147.0,"low":141.6,"volume":118119058,"turnover":16974022049.0,"pe_ratio":19.619,"turnover_rate":0.00619,"last_close":148.6}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-12-17 00:00:00","open":144.2,"close":146.0,"high":147.3,"low":143.1,"volume":60486179,"turnover":8790893882.0,"pe_ratio":19.863,"turnover_rate":0.00317,"last_close":144.2}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-12-18 00:00:00","open":143.1,"close":144.1,"high":144.9,"low":142.9,"volume":47014025,"turnover":6764239879.0,"pe_ratio":19.605,"turnover_rate":0.00246,"last_close":146.0}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-12-19 00:00:00","open":145.0,"close":145.3,"high":146.7,"low":144.2,"volume":70392591,"turnover":10237987194.0,"pe_ratio":19.768,"turnover_rate":0.00369,"last_close":144.1}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-12-22 00:00:00","open":146.0,"close":146.4,"high":148.5,"low":145.0,"volume":58877432,"turnover":8625656120.0,"pe_ratio":19.918,"turnover_rate":0.00308,"last_close":145.3}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-12-23 00:00:00","open":146.7,"close":147.2,"high":148.0,"low":146.4,"volume":47601549,"turnover":7009550959.0,"pe_ratio":20.027,"turnover_rate":0.00249,"last_close":146.4}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-12-24 00:00:00","open":147.0,"close":146.0,"high":148.1,"low":145.1,"volume":28967695,"turnover":4234823630.0,"pe_ratio":19.863,"turnover_rate":0.00152,"last_close":147.2}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-12-29 00:00:00","open":147.1,"close":143.3,"high":148.5,"low":143.3,"volume":62656820,"turnover":9131340598.0,"pe_ratio":19.496,"turnover_rate":0.00328,"last_close":146.0}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-12-30 00:00:00","open":143.3,"close":144.5,"high":145.7,"low":143.2,"volume":60201594,"turnover":8701232705.0,"pe_ratio":19.659,"turnover_rate":0.00315,"last_close":143.3}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2025-12-31 00:00:00","open":143.7,"close":142.8,"high":143.8,"low":142.4,"volume":35628222,"turnover":5089590813.0,"pe_ratio":19.428,"turnover_rate":0.00187,"last_close":144.5}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-01-02 00:00:00","open":143.2,"close":149.0,"high":149.7,"low":142.9,"volume":48902470,"turnover":7215810283.0,"pe_ratio":20.272,"turnover_rate":0.00256,"last_close":142.8}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-01-05 00:00:00","open":151.1,"close":152.8,"high":153.8,"low":150.0,"volume":102834720,"turnover":15681695666.0,"pe_ratio":20.789,"turnover_rate":0.00539,"last_close":149.0}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-01-06 00:00:00","open":150.9,"close":150.8,"high":153.2,"low":150.5,"volume":112004139,"turnover":16966606124.0,"pe_ratio":20.517,"turnover_rate":0.00587,"last_close":152.8}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-01-07 00:00:00","open":147.1,"close":145.9,"high":147.8,"low":143.5,"volume":149677478,"turnover":21758990525.0,"pe_ratio":19.85,"turnover_rate":0.00784,"last_close":150.8}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-01-08 00:00:00","open":143.6,"close":142.6,"high":144.9,"low":141.0,"volume":107421412,"turnover":15345323864.0,"pe_ratio":19.411,"turnover_rate":0.00562,"last_close":145.9}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-01-09 00:00:00","open":148.0,"close":146.5,"high":149.5,"low":145.9,"volume":115234256,"turnover":17002974129.0,"pe_ratio":19.942,"turnover_rate":0.00603,"last_close":142.6}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-01-12 00:00:00","open":146.9,"close":154.3,"high":154.6,"low":146.0,"volume":164580300,"turnover":25051108936.0,"pe_ratio":21.004,"turnover_rate":0.00862,"last_close":146.5}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-01-13 00:00:00","open":162.0,"close":159.9,"high":164.0,"low":157.4,"volume":153153842,"turnover":24540402269.0,"pe_ratio":21.766,"turnover_rate":0.00802,"last_close":154.3}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-01-14 00:00:00","open":163.8,"close":169.0,"high":169.8,"low":162.1,"volume":244622843,"turnover":40785747086.0,"pe_ratio":23.005,"turnover_rate":0.01281,"last_close":159.9}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-01-15 00:00:00","open":168.9,"close":164.6,"high":170.1,"low":163.1,"volume":133061563,"turnover":22058494327.0,"pe_ratio":22.406,"turnover_rate":0.00697,"last_close":169.0}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-01-16 00:00:00","open":167.9,"close":166.2,"high":168.7,"low":165.0,"volume":79370877,"turnover":13213026136.0,"pe_ratio":22.624,"turnover_rate":0.00416,"last_close":164.6}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-01-19 00:00:00","open":162.0,"close":160.4,"high":162.5,"low":160.1,"volume":72500898,"turnover":11677672896.0,"pe_ratio":21.835,"turnover_rate":0.0038,"last_close":166.2}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-01-20 00:00:00","open":159.8,"close":159.7,"high":162.2,"low":158.6,"volume":55456218,"turnover":8868225709.0,"pe_ratio":21.739,"turnover_rate":0.0029,"last_close":160.4}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-01-21 00:00:00","open":158.3,"close":163.2,"high":164.9,"low":158.3,"volume":67441221,"turnover":10924846933.0,"pe_ratio":22.216,"turnover_rate":0.00353,"last_close":159.7}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-01-22 00:00:00","open":166.0,"close":164.8,"high":166.5,"low":162.8,"volume":59810988,"turnover":9836717328.0,"pe_ratio":22.433,"turnover_rate":0.00313,"last_close":163.2}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-01-23 00:00:00","open":171.2,"close":168.5,"high":172.0,"low":168.3,"volume":93252549,"turnover":15805618024.0,"pe_ratio":22.937,"turnover_rate":0.00488,"last_close":164.8}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-01-26 00:00:00","open":169.5,"close":165.2,"high":170.2,"low":164.5,"volume":67819829,"turnover":11255344158.0,"pe_ratio":22.488,"turnover_rate":0.00355,"last_close":168.5}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-01-27 00:00:00","open":166.8,"close":169.9,"high":169.9,"low":164.9,"volume":73661350,"turnover":12414178175.0,"pe_ratio":23.128,"turnover_rate":0.00386,"last_close":165.2}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-01-28 00:00:00","open":170.5,"close":173.5,"high":173.8,"low":168.6,"volume":102209414,"turnover":17569439693.0,"pe_ratio":23.618,"turnover_rate":0.00535,"last_close":169.9}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-01-29 00:00:00","open":171.1,"close":173.3,"high":174.2,"low":170.3,"volume":67539478,"turnover":11666256998.0,"pe_ratio":23.591,"turnover_rate":0.00354,"last_close":173.5}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-01-30 00:00:00","open":170.0,"close":169.2,"high":170.7,"low":167.0,"volume":75134065,"turnover":12703476269.0,"pe_ratio":23.032,"turnover_rate":0.00393,"last_close":173.3}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-02-02 00:00:00","open":164.7,"close":163.3,"high":167.9,"low":161.0,"volume":100747598,"turnover":16482826406.0,"pe_ratio":22.229,"turnover_rate":0.00527,"last_close":169.2}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-02-03 00:00:00","open":165.4,"close":161.0,"high":166.0,"low":155.2,"volume":111086312,"turnover":17742273746.0,"pe_ratio":21.916,"turnover_rate":0.00582,"last_close":163.3}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-02-04 00:00:00","open":159.4,"close":159.5,"high":162.3,"low":157.1,"volume":71689072,"turnover":11420543580.0,"pe_ratio":21.712,"turnover_rate":0.00375,"last_close":161.0}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-02-05 00:00:00","open":155.5,"close":159.6,"high":160.4,"low":154.0,"volume":89720504,"turnover":14067922076.0,"pe_ratio":21.726,"turnover_rate":0.0047,"last_close":159.5}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-02-06 00:00:00","open":153.5,"close":155.0,"high":156.8,"low":153.2,"volume":78125091,"turnover":12098851447.0,"pe_ratio":21.099,"turnover_rate":0.00409,"last_close":159.6}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-02-09 00:00:00","open":159.5,"close":157.9,"high":160.2,"low":157.6,"volume":58582947,"turnover":9290992817.0,"pe_ratio":21.494,"turnover_rate":0.00307,"last_close":155.0}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-02-10 00:00:00","open":159.7,"close":160.5,"high":162.6,"low":158.7,"volume":58402811,"turnover":9385856574.0,"pe_ratio":21.848,"turnover_rate":0.00306,"last_close":157.9}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-02-11 00:00:00","open":161.3,"close":160.1,"high":162.7,"low":159.6,"volume":51639528,"turnover":8312329228.0,"pe_ratio":21.794,"turnover_rate":0.0027,"last_close":160.5}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-02-12 00:00:00","open":157.9,"close":158.6,"high":159.5,"low":156.1,"volume":56768511,"turnover":8953857552.0,"pe_ratio":21.589,"turnover_rate":0.00297,"last_close":160.1}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-02-13 00:00:00","open":154.0,"close":155.4,"high":156.4,"low":153.9,"volume":69945660,"turnover":10844812894.0,"pe_ratio":21.154,"turnover_rate":0.00366,"last_close":158.6}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-02-16 00:00:00","open":152.6,"close":154.7,"high":154.9,"low":150.5,"volume":29215118,"turnover":4460519828.0,"pe_ratio":21.059,"turnover_rate":0.00153,"last_close":155.4}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-02-20 00:00:00","open":150.0,"close":147.1,"high":151.7,"low":147.1,"volume":70273864,"turnover":10443089472.0,"pe_ratio":20.024,"turnover_rate":0.00368,"last_close":154.7}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-02-23 00:00:00","open":150.1,"close":152.2,"high":153.3,"low":149.5,"volume":44852186,"turnover":6820099085.0,"pe_ratio":20.718,"turnover_rate":0.00235,"last_close":147.1}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-02-24 00:00:00","open":149.9,"close":148.0,"high":150.4,"low":147.0,"volume":82838070,"turnover":12279106621.0,"pe_ratio":20.147,"turnover_rate":0.00434,"last_close":152.2}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-02-25 00:00:00","open":149.8,"close":148.3,"high":150.2,"low":148.1,"volume":47742854,"turnover":7109781788.0,"pe_ratio":20.187,"turnover_rate":0.0025,"last_close":148.0}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-02-26 00:00:00","open":148.3,"close":143.0,"high":148.8,"low":143.0,"volume":98872855,"turnover":14310258859.0,"pe_ratio":19.466,"turnover_rate":0.00518,"last_close":148.3}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-02-27 00:00:00","open":143.0,"close":142.9,"high":145.5,"low":142.2,"volume":88719769,"turnover":12741757997.0,"pe_ratio":19.452,"turnover_rate":0.00465,"last_close":143.0}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-03-02 00:00:00","open":139.6,"close":136.4,"high":140.5,"low":135.6,"volume":134838521,"turnover":18547876671.0,"pe_ratio":18.567,"turnover_rate":0.00706,"last_close":142.9}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-03-03 00:00:00","open":139.0,"close":134.8,"high":139.2,"low":134.6,"volume":88507248,"turnover":12087707586.0,"pe_ratio":18.35,"turnover_rate":0.00463,"last_close":136.4}
+{"code":"HK.09988","name":"阿里巴巴-W","time_key":"2026-03-04 00:00:00","open":131.2,"close":129.9,"high":133.0,"low":127.7,"volume":163124992,"turnover":21165511185.0,"pe_ratio":17.683,"turnover_rate":0.00854,"last_close":134.8}
 
 ## 订单字段说明
 | 字段名 | 说明 |
@@ -170,18 +217,57 @@
 | trd_side | 交易方向: BUY - 买入, SELL - 卖出 |
 | price | 订单价格 |
 | qty | 订单数量 |
-| order_status | 订单状态: CANCELLED_ALL - 交易失败, FILLED_ALL - 交易成功 |
-
-## 你的历史预测和真实数据对比
-| 日期 | 预测高点 | 预测低点 | 真实高点 ｜ 真实低点 |
-| 20251112 | HK.00700 | 661 | 640 | 658.5 | 652 |
-| 20251113 | HK.00700 | 660 | 654 | 660 | 645 |
-| 20251114 | HK.00700 | 665 | 643 | 659 | 640 |
-| 20251112 | HK.09988 | 165 | 158 | 158.4 | 155.2 |
-| 20251113 | HK.09988 | 157.5 | 153.5 | 166 | 153.3 |
-| 20251114 | HK.09988 | 167 | 160 | 158.4 | 154.5 |
+| order_status | 订单状态: CANCELLED_ALL - 交易中止, FILLED_ALL - 交易成功 |
 
 ## 真实订单数据
+{"create_time":"2026-03-02","code":"HK.00700","trd_side":"BUY","price":498.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2026-02-20","code":"HK.00700","trd_side":"BUY","price":520.0,"qty":100.0,"order_status":"FILLED_ALL"}
+{"create_time":"2026-02-16","code":"HK.00700","trd_side":"BUY","price":518.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2026-02-13","code":"HK.00700","trd_side":"BUY","price":520.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2026-02-12","code":"HK.00700","trd_side":"BUY","price":535.0,"qty":100.0,"order_status":"FILLED_ALL"}
+{"create_time":"2026-02-11","code":"HK.00700","trd_side":"BUY","price":540.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2026-02-06","code":"HK.00700","trd_side":"BUY","price":540.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2026-02-05","code":"HK.00700","trd_side":"BUY","price":540.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2026-02-03","code":"HK.00700","trd_side":"BUY","price":565.0,"qty":100.0,"order_status":"FILLED_ALL"}
+{"create_time":"2026-02-03","code":"HK.00700","trd_side":"BUY","price":580.0,"qty":100.0,"order_status":"FILLED_ALL"}
+{"create_time":"2026-02-03","code":"HK.00700","trd_side":"BUY","price":590.0,"qty":100.0,"order_status":"FILLED_ALL"}
+{"create_time":"2026-01-29","code":"HK.00700","trd_side":"SELL","price":625.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2026-01-28","code":"HK.00700","trd_side":"SELL","price":625.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2026-01-20","code":"HK.00700","trd_side":"BUY","price":600.0,"qty":100.0,"order_status":"FILLED_ALL"}
+{"create_time":"2026-01-19","code":"HK.00700","trd_side":"BUY","price":610.0,"qty":100.0,"order_status":"FILLED_ALL"}
+{"create_time":"2026-01-16","code":"HK.00700","trd_side":"BUY","price":610.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2026-01-14","code":"HK.00700","trd_side":"SELL","price":642.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2026-01-14","code":"HK.00700","trd_side":"SELL","price":635.0,"qty":100.0,"order_status":"FILLED_ALL"}
+{"create_time":"2026-01-12","code":"HK.00700","trd_side":"SELL","price":630.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2026-01-08","code":"HK.00700","trd_side":"BUY","price":610.0,"qty":100.0,"order_status":"FILLED_ALL"}
+{"create_time":"2026-01-07","code":"HK.00700","trd_side":"BUY","price":612.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2026-01-06","code":"HK.00700","trd_side":"SELL","price":632.0,"qty":100.0,"order_status":"FILLED_ALL"}
+{"create_time":"2026-01-05","code":"HK.00700","trd_side":"SELL","price":630.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2026-01-02","code":"HK.00700","trd_side":"SELL","price":625.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2026-01-02","code":"HK.00700","trd_side":"SELL","price":625.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2026-01-02","code":"HK.00700","trd_side":"SELL","price":619.0,"qty":100.0,"order_status":"FILLED_ALL"}
+{"create_time":"2025-12-23","code":"HK.00700","trd_side":"BUY","price":598.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2025-12-22","code":"HK.00700","trd_side":"SELL","price":625.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2025-12-19","code":"HK.00700","trd_side":"SELL","price":620.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2025-12-19","code":"HK.00700","trd_side":"SELL","price":610.0,"qty":100.0,"order_status":"FILLED_ALL"}
+{"create_time":"2025-12-16","code":"HK.00700","trd_side":"BUY","price":595.0,"qty":100.0,"order_status":"FILLED_ALL"}
+{"create_time":"2025-12-08","code":"HK.00700","trd_side":"BUY","price":599.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2025-12-04","code":"HK.00700","trd_side":"BUY","price":605.0,"qty":100.0,"order_status":"FILLED_ALL"}
+{"create_time":"2025-12-03","code":"HK.00700","trd_side":"SELL","price":628.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2025-12-03","code":"HK.00700","trd_side":"BUY","price":608.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2025-12-02","code":"HK.00700","trd_side":"BUY","price":608.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2025-12-02","code":"HK.00700","trd_side":"SELL","price":626.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2025-12-01","code":"HK.00700","trd_side":"BUY","price":605.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2025-12-01","code":"HK.00700","trd_side":"SELL","price":625.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2025-11-28","code":"HK.00700","trd_side":"SELL","price":625.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2025-11-27","code":"HK.00700","trd_side":"BUY","price":610.0,"qty":100.0,"order_status":"FILLED_ALL"}
+{"create_time":"2025-11-26","code":"HK.00700","trd_side":"SELL","price":635.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2025-11-26","code":"HK.00700","trd_side":"BUY","price":615.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2025-11-25","code":"HK.00700","trd_side":"SELL","price":635.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2025-11-21","code":"HK.00700","trd_side":"BUY","price":598.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2025-11-19","code":"HK.00700","trd_side":"BUY","price":620.0,"qty":100.0,"order_status":"FILLED_ALL"}
+{"create_time":"2025-11-18","code":"HK.00700","trd_side":"BUY","price":620.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2025-11-18","code":"HK.00700","trd_side":"BUY","price":618.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
 {"create_time":"2025-11-14","code":"HK.00700","trd_side":"SELL","price":675.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
 {"create_time":"2025-11-13","code":"HK.00700","trd_side":"SELL","price":675.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
 {"create_time":"2025-11-13","code":"HK.00700","trd_side":"BUY","price":628.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
@@ -202,17 +288,34 @@
 {"create_time":"2025-10-03","code":"HK.00700","trd_side":"BUY","price":669.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
 {"create_time":"2025-10-02","code":"HK.00700","trd_side":"SELL","price":680.0,"qty":100.0,"order_status":"FILLED_ALL"}
 {"create_time":"2025-10-02","code":"HK.00700","trd_side":"SELL","price":675.5,"qty":100.0,"order_status":"FILLED_ALL"}
-{"create_time":"2025-09-30","code":"HK.00700","trd_side":"SELL","price":668.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
-{"create_time":"2025-09-26","code":"HK.00700","trd_side":"SELL","price":660.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
-{"create_time":"2025-09-25","code":"HK.00700","trd_side":"SELL","price":660.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
-{"create_time":"2025-09-25","code":"HK.00700","trd_side":"SELL","price":653.0,"qty":100.0,"order_status":"FILLED_ALL"}
-{"create_time":"2025-09-24","code":"HK.00700","trd_side":"SELL","price":645.0,"qty":100.0,"order_status":"FILLED_ALL"}
-{"create_time":"2025-09-23","code":"HK.00700","trd_side":"BUY","price":629.0,"qty":100.0,"order_status":"FILLED_ALL"}
-{"create_time":"2025-09-22","code":"HK.00700","trd_side":"BUY","price":637.0,"qty":100.0,"order_status":"FILLED_ALL"}
-{"create_time":"2025-09-19","code":"HK.00700","trd_side":"BUY","price":635.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
-{"create_time":"2025-09-17","code":"HK.00700","trd_side":"SELL","price":660.0,"qty":100.0,"order_status":"FILLED_ALL"}
-{"create_time":"2025-09-17","code":"HK.00700","trd_side":"SELL","price":650.0,"qty":100.0,"order_status":"FILLED_ALL"}
-{"create_time":"2025-09-16","code":"HK.00700","trd_side":"SELL","price":648.0,"qty":100.0,"order_status":"FILLED_ALL"}
+{"create_time":"2026-03-02","code":"HK.09988","trd_side":"BUY","price":135.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2026-02-26","code":"HK.09988","trd_side":"BUY","price":144.0,"qty":100.0,"order_status":"FILLED_ALL"}
+{"create_time":"2026-02-20","code":"HK.09988","trd_side":"BUY","price":149.0,"qty":100.0,"order_status":"FILLED_ALL"}
+{"create_time":"2026-02-16","code":"HK.09988","trd_side":"BUY","price":148.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2026-02-06","code":"HK.09988","trd_side":"BUY","price":153.7,"qty":100.0,"order_status":"FILLED_ALL"}
+{"create_time":"2026-02-05","code":"HK.09988","trd_side":"BUY","price":150.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2026-02-03","code":"HK.09988","trd_side":"BUY","price":150.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2026-02-03","code":"HK.09988","trd_side":"BUY","price":157.5,"qty":100.0,"order_status":"FILLED_ALL"}
+{"create_time":"2026-01-28","code":"HK.09988","trd_side":"SELL","price":174.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2026-01-20","code":"HK.09988","trd_side":"BUY","price":158.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2026-01-16","code":"HK.09988","trd_side":"SELL","price":171.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2026-01-15","code":"HK.09988","trd_side":"SELL","price":169.5,"qty":100.0,"order_status":"FILLED_ALL"}
+{"create_time":"2026-01-14","code":"HK.09988","trd_side":"SELL","price":171.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2026-01-14","code":"HK.09988","trd_side":"SELL","price":165.0,"qty":100.0,"order_status":"FILLED_ALL"}
+{"create_time":"2026-01-13","code":"HK.09988","trd_side":"SELL","price":159.0,"qty":100.0,"order_status":"FILLED_ALL"}
+{"create_time":"2025-12-16","code":"HK.09988","trd_side":"BUY","price":142.0,"qty":100.0,"order_status":"FILLED_ALL"}
+{"create_time":"2025-12-08","code":"HK.09988","trd_side":"BUY","price":148.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2025-12-04","code":"HK.09988","trd_side":"BUY","price":148.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2025-12-03","code":"HK.09988","trd_side":"BUY","price":148.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2025-12-03","code":"HK.09988","trd_side":"SELL","price":160.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2025-12-02","code":"HK.09988","trd_side":"BUY","price":150.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2025-12-02","code":"HK.09988","trd_side":"SELL","price":160.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2025-12-01","code":"HK.09988","trd_side":"BUY","price":145.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2025-12-01","code":"HK.09988","trd_side":"SELL","price":158.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2025-11-27","code":"HK.09988","trd_side":"BUY","price":150.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2025-11-21","code":"HK.09988","trd_side":"BUY","price":148.0,"qty":100.0,"order_status":"FILLED_ALL"}
+{"create_time":"2025-11-19","code":"HK.09988","trd_side":"BUY","price":150.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+{"create_time":"2025-11-18","code":"HK.09988","trd_side":"BUY","price":150.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
 {"create_time":"2025-11-14","code":"HK.09988","trd_side":"BUY","price":152.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
 {"create_time":"2025-11-14","code":"HK.09988","trd_side":"SELL","price":167.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
 {"create_time":"2025-11-13","code":"HK.09988","trd_side":"BUY","price":150.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
@@ -228,8 +331,114 @@
 {"create_time":"2025-10-08","code":"HK.09988","trd_side":"BUY","price":174.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
 {"create_time":"2025-10-06","code":"HK.09988","trd_side":"BUY","price":178.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
 {"create_time":"2025-10-02","code":"HK.09988","trd_side":"SELL","price":184.0,"qty":100.0,"order_status":"FILLED_ALL"}
-{"create_time":"2025-09-25","code":"HK.09988","trd_side":"SELL","price":178.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
-{"create_time":"2025-09-24","code":"HK.09988","trd_side":"SELL","price":170.0,"qty":100.0,"order_status":"FILLED_ALL"}
-{"create_time":"2025-09-24","code":"HK.09988","trd_side":"SELL","price":162.0,"qty":100.0,"order_status":"FILLED_ALL"}
-{"create_time":"2025-09-17","code":"HK.09988","trd_side":"SELL","price":159.0,"qty":100.0,"order_status":"FILLED_ALL"}
-{"create_time":"2025-09-16","code":"HK.09988","trd_side":"SELL","price":155.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
+
+## 模型预测和真实数据对比
+| 日期 | 真实高点 ｜ 真实低点 | DeepSeek预测高点 | DeepSeek预测低点 | Gemini预测高点 | Gemini预测低点 | 
+| 20251118 | HK.00700 | 641 | 620.5 | 643 | 630 | 644.5 | 629 |
+| 20251119 | HK.00700 | 631.5 | 619.5 | 638 | 618 | 635 | 612 |
+| 20251120 | HK.00700 | 631.5 | 615.5 | 632 | 618 | 633.5 | 615 |
+| 20251121 | HK.00700 | 615 | 606 | 628 | 610 | 628.5 | 612.5 |
+| 20251124 | HK.00700 | 627.5 | 613.5 | 618 | 602 | 616 | 598 |
+| 20251125 | HK.00700 | 635 | 620.5 | 630 | 615 | 635 | 618 |
+| 20251126 | HK.00700 | 630 | 618 | 635 | 618 | 636.5 | 618 |
+| 20251127 | HK.00700 | 620.5 | 609 | 628 | 615 | 629 | 614 |
+| 20251128 | HK.00700 | 617 | 608.5 | 615 | 605 | 622.5 | 605 |
+| 20251201 | HK.00700 | 623 | 613 | 615 | 605 | 619 | 606.5 |
+| 20251202 | HK.00700 | 626 | 615 | 625 | 615 | 629.5 | 612 |
+| 20251203 | HK.00700 | 616 | 608.5 | 625 | 610 | 624 | 612.5 |
+| 20251204 | HK.00700 | 613 | 605 | 620 | 605 | 615 | 603 |
+| 20251205 | HK.00700 | 611 | 604 | 622 | 606 | 619.5 | 603 |
+| 20251208 | HK.00700 | 609.5 | 604 | 618 | 606 | 618.5 | 602 |
+| 20251209 | HK.00700 | 610 | 596 | 612 | 600 | 613 | 601.5 |
+| 20251210 | HK.00700 | 603 | 595 | 608 | 590 | 610 | 592 |
+| 20251211 | HK.00700 | 612 | 599 | 615 | 595 | 609.5 | 596 |
+| 20251212 | HK.00700 | 616 | 601.5 | 610 | 595 | 610 | 593 |
+| 20251215 | HK.00700 | 608.5 | 602 | 628 | 602 | 628.5 | 611 |
+| 20251216 | HK.00700 | 603 | 592 | 603 | 592 | 610 | 596 |
+| 20251217 | HK.00700 | 606 | 594.5 | 603 | 589 | 606.5 | 590 |
+| 20251218 | HK.00700 | 606 | 599 | 610 | 592 | 613 | 598.5 |
+| 20251219 | HK.00700 | 617.5 | 607 | 615 | 602 | 612 | 604.5 |
+| 20251222 | HK.00700 | 621 | 610 | 622 | 608 | 623.5 | 608.5 |
+| 20251223 | HK.00700 | 614.5 | 601.5 | 618 | 608 | 626.5 | 610 |
+| 20251224 | HK.00700 | 604.5 | 598 | 610 | 595 | 609.5 | 596 |
+| 20251229 | HK.00700 | 611 | 596 | 615 | 595 | 612 | 596.5 |
+| 20251230 | HK.00700 | 601 | 594 | 608 | 593 | 604 | 589 |
+| 20251231 | HK.00700 | 602.5 | 596 | 604.5 | 595 | 606 | 594.5 |
+| 20260102 | HK.00700 | 624.5 | 600.5 | 612 | 598 | 610 | 600.5 |
+| 20260105 | HK.00700 | 628 | 615 | 635 | 610 | 634 | 615.5 |
+| 20260106 | HK.00700 | 638.5 | 626 | 632 | 618 | 633 | 616.5 |
+| 20260107 | HK.00700 | 629.5 | 615 | 642 | 628 | 642.5 | 628.5 |
+| 20260108 | HK.00700 | 621 | 610 | 632 | 618 | 633 | 612 |
+| 20260109 | HK.00700 | 617 | 610 | 635 | 618 | 623 | 605 |
+| 20260112 | HK.00700 | 627.5 | 613.5 | 625 | 608 | 618 | 605.5 |
+| 20260113 | HK.00700 | 639 | 622.5 | 635 | 618 | 633 | 618 |
+| 20260114 | HK.00700 | 638.5 | 626 | 638 | 622 | 636 | 619.5 |
+| 20260115 | HK.00700 | 632.5 | 618.5 | 645 | 630 | 642 | 628.5 |
+| 20260116 | HK.00700 | 630 | 613.5 | 633 | 630 | 642 | 628.5 |
+| 20260119 | HK.00700 | 614.5 | 608.5 | 630 | 610 | 626.5 | 612 |
+| 20260120 | HK.00700 | 607 | 598 | 625 | 605 | 618.5 | 605.5 |
+| 20260121 | HK.00700 | 606 | 598 | 612 | 595 | 610 | 594.5 |
+| 20260122 | HK.00700 | 605.5 | 596 | 615 | 600 | 612.5 | 597.5 |
+| 20260123 | HK.00700 | 602 | 595 | 612 | 595 | 604.5 | 591 |
+| 20260126 | HK.00700 | 605 | 594 | 604 | 596 | 605 | 593 |
+| 20260127 | HK.00700 | 610.5 | 598.5 | 611 | 598 | 608 | 595 |
+| 20260128 | HK.00700 | 623| 610.5 | 610 | 595 | 618 | 602 |
+| 20260129 | HK.00700 | 625 | 612.5 | 621 | 608 | 619 | 604 |
+| 20260130 | HK.00700 | 619.5 | 605.5 | 620 | 612 | 618 | 602 |
+| 20260202 | HK.00700 | 604.5 | 590.5 | 610 | 595 | 615 | 598 |
+| 20260203 | HK.00700 | 601.5 | 561 | 608 | 598 | 610 | 600 |
+| 20260223 | HK.00700 | 533 | 518 | 535 | 515 | 529.5 | 513 |
+| 20251118 | HK.09988 | 158.4 | 153.2 | 156.5 | 151 | 160.5 | 153.2 |
+| 20251119 | HK.09988 | 157.9 | 155.1 | 158 | 152 | 157.8 | 152.8 |
+| 20251120 | HK.09988 | 159.8 | 154 | 158.5 | 154 | 159.6 | 154.4 |
+| 20251121 | HK.09988 | 150.6 | 146.9 | 157.8 | 153.5 | 158.9 | 152 |
+| 20251124 | HK.09988 | 156.3 | 147.8 | 150.5 | 145 | 150.2 | 145.2 |
+| 20251125 | HK.09988 | 160.5 | 153.4 | 158 | 150 | 158.5 | 151.5 |
+| 20251126 | HK.09988 | 158 | 153.4 | 162 | 154 | 162 | 154.5 |
+| 20251127 | HK.09988 | 154.9 | 150.1 | 157 | 152 | 159 | 152 |
+| 20251128 | HK.09988 | 153.2 | 151 | 154 | 148 | 156 | 148.5 |
+| 20251201 | HK.09988 | 156.9 | 152 | 154 | 150 | 154.5 | 149.5 |
+| 20251202 | HK.09988 | 160.1 | 156.3 | 157 | 152 | 158.5 | 152 |
+| 20251203 | HK.09988 | 156.6 | 153.1 | 162 | 155 | 159.5 | 154.5 |
+| 20251204 | HK.09988 | 155.1 | 152.5 | 158 | 152 | 156.5 | 149 |
+| 20251205 | HK.09988 | 155.1 | 152.6 | 157.5 | 152.5 | 157 | 151.5 |
+| 20251208 | HK.09988 | 155.5 | 152.8 | 157.5 | 154 | 158 | 151.5 |
+| 20251209 | HK.09988 | 156.8 | 150.4 | 156 | 150.5 | 156.5 | 151.8 |
+| 20251210 | HK.09988 | 153.4 | 149.6 | 154.5 | 148 | 155.5 | 148.5 |
+| 20251211 | HK.09988 | 155.5 | 150.5 | 157 | 150.5 | 156 | 150.5 |
+| 20251212 | HK.09988 | 154.1 | 150.8 | 155 | 149 | 155 | 148.5 |
+| 20251215 | HK.09988 | 151.7 | 148.5 | 158 | 151 | 157.5 | 142.5 |
+| 20251216 | HK.09988 | 147 | 141.6 | 152.5 | 146 | 152 | 145.5 |
+| 20251217 | HK.09988 | 147.3 | 143.1 | 148 | 142 | 149 | 140.5 |
+| 20251218 | HK.09988 | 144.9 | 142.9 | 149 | 143 | 149.5 | 144 |
+| 20251219 | HK.09988 | 146.7 | 144.2 | 146 | 142 | 145.5 | 142.5 |
+| 20251222 | HK.09988 | 148.5 | 145 | 146.5 | 143.5 | 148.5 | 143.5 |
+| 20251223 | HK.09988 | 148 | 146.4 | 149 | 145.5 | 150 | 145 |
+| 20251224 | HK.09988 | 148.1 | 145.1 | 150.5 | 145.5 | 149 | 145.5 |
+| 20251229 | HK.09988 | 148.5 | 143.3 | 150.5 | 145.5 | 148.5 | 143.5 |
+| 20251230 | HK.09988 | 145.7 | 143.2 | 147 | 141 | 146.5 | 141.2 |
+| 20251231 | HK.09988 | 143.8 | 142.4 | 144 | 142 | 144.5 | 142.8 |
+| 20260102 | HK.09988 | 149.7 | 142.9 | 146.5 | 144 | 148.5 | 145 |
+| 20260105 | HK.09988 | 153.8 | 150 | 152 | 145.5 | 154.5 | 145.8 |
+| 20260106 | HK.09988 | 153.2 | 150.5 | 156.5 | 150.5 | 157.5 | 150.8 |
+| 20260107 | HK.09988 | 147.8 | 143.5 | 154 | 149 | 153.5 | 149.5 |
+| 20260108 | HK.09988 | 144.9 | 141 | 151 | 143.5 | 149.5 | 142.5 |
+| 20260109 | HK.09988 | 149.5 | 145.9 | 148 | 141 | 145.5 | 138.5 |
+| 20260112 | HK.09988 | 154.6 | 146 | 148 | 141 | 150.5 | 144.5 |
+| 20260113 | HK.09988 | 164 | 157.4 | 158 | 150.5 | 158.5 | 151 |
+| 20260114 | HK.09988 | 169.8 | 162.1 | 163 | 157 | 163.5 | 156.2 |
+| 20260115 | HK.09988 | 170.1 | 163.1 | 172 | 165 | 173.5 | 164 |
+| 20260116 | HK.09988 | 168.7 | 165 | 172 | 165 | 173.5 | 164 |
+| 20260119 | HK.09988 | 162.5 | 160.1 | 170 | 162 | 170 | 162.5 |
+| 20260120 | HK.09988 | 162.2 | 158.6 | 170 | 158 | 163.5 | 158.2 |
+| 20260121 | HK.09988 | 164.9 | 158.3 | 163 | 156 | 164 | 158 |
+| 20260122 | HK.09988 | 166.5 | 162.5 | 168 | 162 | 164 | 158 |
+| 20260123 | HK.09988 | 172 | 168.3 | 169 | 161 | 168 | 162 |
+| 20260126 | HK.09988 | 170.2 | 164.5 | 168.5 | 165 | 167.5 | 164.5 |
+| 20260127 | HK.09988 | 169.9 | 164.9 | 171 | 165 | 170.5 | 165 |
+| 20260128 | HK.09988 | 173.8 | 168.6 | 172.5 | 166 | 172.8 | 170.5 |
+| 20260129 | HK.09988 | 174.2 | 170.3 | 174 | 169 | 175 | 172.5 |
+| 20260130 | HK.09988 | 170.7 | 167 | 172 | 168 | 170 | 168 |
+| 20260202 | HK.09988 | 167.9 | 161 | 171 | 165 | 168 | 162.5 |
+| 20260203 | HK.09988 | 166 | 155.2 | 168 | 160 | 165 | 158 |
+| 20260223 | HK.09988 | 151.7 | 147.1 | 151 | 144.5 | 151 | 143.5 |

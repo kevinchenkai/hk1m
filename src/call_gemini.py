@@ -1,3 +1,8 @@
+# documentation: https://googleapis.github.io/python-genai/
+from google import genai
+
+client = genai.Client(api_key="AIzaSyCtYOsSmjrYek1R3HJexD3N7sClIZrq3sE")
+user_prompt = """
 ## 角色
 你是顶级股票交易员, 请根据用户持仓和现金, 历史K线数据, 预测次日股票价格，并制定交易策略。
 
@@ -25,6 +30,8 @@ HK.00700 持仓 2000 股票，账号 100W 港币现金
 | last_close | float | 昨收价 |
 
 ## 最近真实 日K线 数据
+{"code":"HK.00700","name":"腾讯控股","time_key":"2025-08-20 00:00:00","open":589.0,"close":590.5,"high":594.5,"low":585.5,"volume":15952765,"turnover":9407128004.0,"pe_ratio":25.841,"turnover_rate":0.00174,"last_close":592.5}
+{"code":"HK.00700","name":"腾讯控股","time_key":"2025-08-21 00:00:00","open":590.5,"close":593.0,"high":597.0,"low":589.5,"volume":14290178,"turnover":8479961596.0,"pe_ratio":25.95,"turnover_rate":0.00156,"last_close":590.5}
 {"code":"HK.00700","name":"腾讯控股","time_key":"2025-08-22 00:00:00","open":599.0,"close":600.0,"high":606.5,"low":595.5,"volume":19378950,"turnover":11636897211.0,"pe_ratio":26.257,"turnover_rate":0.00211,"last_close":593.0}
 {"code":"HK.00700","name":"腾讯控股","time_key":"2025-08-25 00:00:00","open":608.5,"close":614.5,"high":621.0,"low":608.0,"volume":25694519,"turnover":15801902006.0,"pe_ratio":26.892,"turnover_rate":0.0028,"last_close":600.0}
 {"code":"HK.00700","name":"腾讯控股","time_key":"2025-08-26 00:00:00","open":612.0,"close":609.5,"high":618.0,"low":609.5,"volume":20656474,"turnover":12655282002.0,"pe_ratio":26.675,"turnover_rate":0.00225,"last_close":614.5}
@@ -87,8 +94,6 @@ HK.00700 持仓 2000 股票，账号 100W 港币现金
 {"code":"HK.00700","name":"腾讯控股","time_key":"2025-11-18 00:00:00","open":628.0,"close":623.5,"high":641.0,"low":620.5,"volume":18818609,"turnover":11791388064.0,"pe_ratio":27.206,"turnover_rate":0.00206,"last_close":636.5}
 {"code":"HK.00700","name":"腾讯控股","time_key":"2025-11-19 00:00:00","open":627.5,"close":622.5,"high":631.5,"low":619.5,"volume":13959708,"turnover":8712756872.0,"pe_ratio":27.163,"turnover_rate":0.00153,"last_close":623.5}
 {"code":"HK.00700","name":"腾讯控股","time_key":"2025-11-20 00:00:00","open":626.5,"close":621.0,"high":630.5,"low":615.5,"volume":14015988,"turnover":8688329736.0,"pe_ratio":27.097,"turnover_rate":0.00153,"last_close":622.5}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-11-21 00:00:00","open":610.0,"close":610.0,"high":615.0,"low":606.0,"volume":23732050,"turnover":14481878345.0,"pe_ratio":26.617,"turnover_rate":0.0026,"last_close":621.0}
-{"code":"HK.00700","name":"腾讯控股","time_key":"2025-11-24 00:00:00","open":615.0,"close":624.5,"high":627.5,"low":613.5,"volume":22376801,"turnover":13930485181.0,"pe_ratio":27.25,"turnover_rate":0.00245,"last_close":610.0}
 
 ## 模型预测和真实数据对比
 | 日期 | 真实高点 ｜ 真实低点 | DeepSeek预测高点 | DeepSeek预测低点 | Gemini预测高点 | Gemini预测低点 | 
@@ -99,8 +104,6 @@ HK.00700 持仓 2000 股票，账号 100W 港币现金
 | 20251118 | HK.00700 | 641 | 620.5 | 643 | 630 | 644.5 | 629 |
 | 20251119 | HK.00700 | 631.5 | 619.5 | 638 | 618 | 635 | 612 |
 | 20251120 | HK.00700 | 631.5 | 615.5 | 632 | 618 | 633.5 | 615 |
-| 20251121 | HK.00700 | 615 | 606 | 628 | 610 | 628.5 | 612.5 |
-| 20251124 | HK.00700 | 627.5 | 613.5 | 618 | 602 | 616 | 598 |
 
 ## 订单字段说明
 | 字段名 | 说明 |
@@ -112,7 +115,6 @@ HK.00700 持仓 2000 股票，账号 100W 港币现金
 | order_status | 订单状态: CANCELLED_ALL - 交易中止, FILLED_ALL - 交易成功 |
 
 ## 真实订单数据
-{"create_time":"2025-11-21","code":"HK.00700","trd_side":"BUY","price":598.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
 {"create_time":"2025-11-19","code":"HK.00700","trd_side":"BUY","price":620.0,"qty":100.0,"order_status":"FILLED_ALL"}
 {"create_time":"2025-11-18","code":"HK.00700","trd_side":"BUY","price":620.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
 {"create_time":"2025-11-18","code":"HK.00700","trd_side":"BUY","price":618.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
@@ -140,3 +142,14 @@ HK.00700 持仓 2000 股票，账号 100W 港币现金
 {"create_time":"2025-09-26","code":"HK.00700","trd_side":"SELL","price":660.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
 {"create_time":"2025-09-25","code":"HK.00700","trd_side":"SELL","price":660.0,"qty":100.0,"order_status":"CANCELLED_ALL"}
 {"create_time":"2025-09-25","code":"HK.00700","trd_side":"SELL","price":653.0,"qty":100.0,"order_status":"FILLED_ALL"}
+{"create_time":"2025-09-24","code":"HK.00700","trd_side":"SELL","price":645.0,"qty":100.0,"order_status":"FILLED_ALL"}
+{"create_time":"2025-09-23","code":"HK.00700","trd_side":"BUY","price":629.0,"qty":100.0,"order_status":"FILLED_ALL"}
+{"create_time":"2025-09-22","code":"HK.00700","trd_side":"BUY","price":637.0,"qty":100.0,"order_status":"FILLED_ALL"}
+"""
+
+response = client.models.generate_content(
+    model = "gemini-3-pro-preview",
+    contents = user_prompt
+)
+
+print(response.text)

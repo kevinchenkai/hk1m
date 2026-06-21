@@ -2,6 +2,7 @@ from futu import *
 import pandas as pd
 from common import *
 
+START_DAY = '2025-10-01'
 def load_order_data(stock_code):
     """
     加载订单数据
@@ -49,7 +50,8 @@ def get_order_data(stock_code, p_day=10):
     trd_ctx = create_trade_context()
     
     try:
-        p_start, p_end = format_date_range(p_day)
+        #p_start, p_end = format_date_range(p_day)
+        p_start, p_end = from_date_range(START_DAY)
         ret, data = trd_ctx.history_order_list_query(code=stock_code, start=p_start, end=p_end)
         
         if ret == RET_OK:
